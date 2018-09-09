@@ -1,0 +1,17 @@
+body{
+    background:url('../images/City.png');
+    background-repeat: no-repeat;
+    background-size: 4000px, 1500px;
+    
+}
+
+#cat{
+    position: absolute;
+    background:url('../images/cat.png');
+    background-size:600px;
+    background-repeat: no-repeat;
+    height:600px;
+    width:600px;
+    top:1500px;
+    left:20px;
+}
