@@ -3,8 +3,8 @@ var cat = function(){
     this.xPos = 100;
     this.yPos = 0;
     this.initialize = function(){
-        self.xPos = 1500;
-        self.yPos = 1200;
+        self.xPos = 500;
+        self.yPos = 500;
     }
     this.updateXpos = function(newXpos){
         self.xPos = self.xPos + newXpos;

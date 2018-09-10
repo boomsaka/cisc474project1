@@ -10,9 +10,9 @@ var UI = function()
 
         $('body').keypress(function(event){
             if(event.which == 32){
-                self.game.updateXpos(-300);
+                self.game.updateXpos(-50);
             }else{
-                self.game.updateXpos(300);
+                self.game.updateXpos(50);
             }
             $('#cat').css("top",self.game.xPos+'px');
         });
