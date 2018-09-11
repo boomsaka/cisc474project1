@@ -1,3 +1,4 @@
+
 var cat = function(){
     var self = this;
     this.xPos = 100;
@@ -7,10 +8,14 @@ var cat = function(){
         self.yPos = 500;
     }
     this.updateXpos = function(newXpos){
+        //if (self.xPos + newXpos <= document.getElementById("playBoard").style.width)
         self.xPos = self.xPos + newXpos;
     }
     this.updateYpos = function(newYpos){
-        self.yPos = self.yPos + newYpos;
+        var max = $('#playBoard').height();
+        if ((self.yPos + newYpos+ $('#cat').height()) < max && (self.yPos + newYpos) >= 0){
+            self.yPos = self.yPos + newYpos;
+        }
     }
     this.initialize();
 }
