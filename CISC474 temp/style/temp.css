@@ -1,6 +1,6 @@
 #gameBoard{
-    width: 1020px;    
-    height: 585px;
+    width: 980px;    
+    height: 560px;
     border-style:solid;
     border-width:1px;
     border-color:black;
@@ -13,8 +13,8 @@
     background-size: contain;
     background-repeat: no-repeat;
     margin:10px 10px;
-    width: 1000px;
-    height: 575px;
+    width: 960px;
+    height: 540px;
     position:relative;
 }
 
@@ -23,8 +23,9 @@
     background:url('../images/cat.png');
     background-repeat: no-repeat;
     background-size:100px;
-    height:100px;
+    height:67px;
     width:100px;
-    top:100px;
-    left:20px;
+    border-style:solid;
+    border-width:1px;
+    border-color:black;
 }

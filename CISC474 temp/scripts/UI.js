@@ -7,15 +7,6 @@ var UI = function()
         self.game = new cat();
         $('#cat').css("top",self.game.yPos+'px');
         $('#cat').css("left",self.game.xPos+'px');
-<<<<<<< HEAD
-
-        $('body').keypress(function(event){
-            if(event.which == 119){ //w
-                self.game.updateYpos(-50);
-            }else{
-                self.game.updateYpos(50);
-            }
-=======
         
 
         $('body').keypress(function(event){
@@ -32,8 +23,7 @@ var UI = function()
             else if (event.which == 100){
                 self.game.updateXpos(50);
             }
-
->>>>>>> 15be42f59afe34341faed56c39853c5e0a7c7805
+            //alert(event.type + ": " + event.which);
             $('#cat').css("top",self.game.yPos+'px');
             $('#cat').css("left",self.game.xPos+'px');
         });
