@@ -32,7 +32,7 @@
 
 #cat{
     position: absolute;
-    background:url('../images/cat.png');
+    background:url('../images/Cat.png');
     background-repeat: no-repeat;
     background-size:100px;
     height:67px;
@@ -44,7 +44,7 @@
 
 #stone{
     position: absolute;
-    background:url('../images/stone.png');
+    background:url('../images/Stone.png');
     background-repeat: no-repeat;
     background-size:100px;
     height:67px;
