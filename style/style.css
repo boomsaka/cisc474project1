@@ -10,8 +10,9 @@
 
 #test{
     width: 100px;    
-    height: 200px;
+    height: 100px;
     left: 1000px;
+    top: 10px;
     position: absolute;
     border-style:solid;
     border-width:1px;
@@ -20,19 +21,28 @@
     padding:0;
 }
 
-#playBoard{
+#backgroundBoard{
     background:url('../images/City.png');
     background-size: contain;
     background-repeat: no-repeat;
     margin:10px 10px;
     width: 960px;
     height: 540px;
-    position:relative;
+    position: absolute;;
+}
+
+#playBoard{
+    left: 0px;
+    right: 0px;
+    margin:10px 10px;
+    width: 960px;
+    height: 540px;
+    position: absolute;
 }
 
 #cat{
     position: absolute;
-    background:url('../images/cat.png');
+    background:url('../images/Cat.png');
     background-repeat: no-repeat;
     background-size:100px;
     height:67px;
@@ -42,9 +52,9 @@
     border-color:black;
 }
 
-#stone{
+.stone{
     position: absolute;
-    background:url('../images/stone.png');
+    background:url('../images/Stone.png');
     background-repeat: no-repeat;
     background-size:100px;
     height:67px;
@@ -52,4 +62,29 @@
     border-style:solid;
     border-width:1px;
     border-color:black;
+}
+
+.star{
+    position: absolute;
+    background:url('../images/Star.png');
+    background-repeat: no-repeat;
+    background-size:45px;
+    height:49px;
+    width:45px;
+    border-style:solid;
+    border-width:1px;
+    border-color:black;
+}
+
+#scoreboard{
+    width: 100px;    
+    height: 100px;
+    left: 1000px;
+    top: 115px;
+    position: absolute;
+    border-style:solid;
+    border-width:1px;
+    border-color:black;
+    margin:0;
+    padding:0;
 }
