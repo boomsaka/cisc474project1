@@ -52,7 +52,7 @@
     border-color:black;
 }
 
-#stone{
+.stone{
     position: absolute;
     background:url('../images/Stone.png');
     background-repeat: no-repeat;

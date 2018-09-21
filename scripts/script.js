@@ -12,8 +12,9 @@ CAT_HEIGHT = 67;
 function Game(){
   this.world = new World(); // Creates the world which includes gravity and etc.
   this.cat = new Cat();     // Creates a cat 
-  this.stone = new Stone(600, 320); 
   this.star_list;
+  this.stone_list;
+
   
   this.init = function(){
     // Initialize the cat
@@ -21,8 +22,10 @@ function Game(){
     
     // Generate the stars
     this.star_list = this.generateStars();
+    this.stone_list = this.generateStones();
     appendStarsToHTML(this.star_list); // css draw the stars according to how many 'star's there are in the html, 
                                        // and the 'star' elements in the html are generated from 'star_list'.
+    appendStonesToHTML(this.stone_list);
     
     // Paint the first frame of our game animation
     requestAnimationFrame(mainLoop); 
@@ -35,10 +38,20 @@ function Game(){
       // (the star_id needs to be unique, becuase it is used for tracking which star the cat collides into when collision happens)
       new Star(150, 320, 'star1'),  
       new Star(300, 320, 'star2'), 
-      new Star(550, 320, 'star3')
+      new Star(550, 320, 'star3'),
     ]
     return star_lst;
   }
+
+  this.generateStones = function(){
+    var stone_list = [
+      new Stone(200, 320, 'stone1'),
+      new Stone(350, 320, 'stone2'),
+      new Stone(600, 320, 'stone3')
+    ]
+    return stone_list;
+  }
+
 
   // Checks collision between cat and a LIST OF obstacles
   this.checkCollisionList = function(cat, obstacleList){
@@ -59,7 +72,6 @@ function Game(){
       // if the obstacle is a Star
       if (obstacle_type == 'Star'){
         $('#test').text("star collision");
-
         if (document.getElementById(obstacle.starId)){ // if the star element exist (if the star element is not been deleted yet)
           // remove the star by using the 'starId' attribute from the actual html (each star has an id)
           var star_remove = document.getElementById(obstacle.starId);
@@ -70,10 +82,10 @@ function Game(){
           this.cat.score += 1;
         } else{} // if 'star' element doensn't exist, just pass
       }
-      // if the obstacle is a Stone
-      else if(obstacle_type == 'Stone'){
-        $('#test').text("STONE collision");
-      }
+      //if the obstacle is a Stone
+        else if(obstacle_type == 'Stone'){
+          $('#test').text(obstacle.stoneID+ " collsion");
+        }
     }
 
     return Object.getPrototypeOf(obstacle).constructor.name;
@@ -177,11 +189,12 @@ function Cat(){
 }
 
 /** Obstacles (stone for now) */
-function Stone(xPos, yPos){
+function Stone(xPos, yPos, stoneID){
   this.xPos = xPos;
   this.yPos = yPos;
   this.dx = 0;
   this.dy = 0;
+  this.stoneID = stoneID;
   this.move_speed = 2;
   this.width = 100; // the stone's width & height are used for check collision
   this.height = 67;
@@ -242,6 +255,7 @@ function Star(xPos, yPos, starId){ // starId is the id name for the star object 
   this.height = STAR_HEIGHT;
 }
 
+
 /** Append the star objects in star_list to html */
 function appendStarsToHTML(starList){
   // Create the list element
@@ -256,6 +270,18 @@ function appendStarsToHTML(starList){
   document.getElementById('stars').appendChild(star_list); // append the stars to html element with id = 'stars'
 }
 
+function appendStonesToHTML(stoneList){
+  var stone_list = document.createElement('div');
+
+  for(var i = 0; i < stoneList.length; i++){
+      var stone_item = document.createElement('div');
+      stone_item.setAttribute('class', 'stone');
+      stone_item.setAttribute('id', stoneList[i].stoneID);
+      stone_list.appendChild(stone_item);
+  }
+  document.getElementById('stones').appendChild(stone_list);
+}
+
 
 
 
@@ -264,10 +290,15 @@ function updateCatCSSPosition(){
   $('#cat').css('top', game.cat.yPos + 'px');
   $('#cat').css('left', game.cat.xPos + 'px');
 }
+
 function updateStoneCSSPosition(){
-  $('#stone').css("top", game.stone.yPos+'px');
-  $('#stone').css("left", game.stone.xPos+'px');
+  for (var i = 0; i < game.star_list.length; i++) {
+    var star_id = '#'+game.stone_list[i].stoneID;
+    $(star_id).css("top", game.stone_list[i].yPos + 'px');
+    $(star_id).css("left", game.stone_list[i].xPos + 'px');
+  }
 }
+
 function updateStarsCSSPosition(){
   for (var i = 0; i < game.star_list.length; i++) {
     var star_id = '#' + game.star_list[i].starId;
@@ -286,19 +317,16 @@ function mainLoop() { // time passed by requestAnimationFrame
 
   // Keep updating the game.cat's obstacleect position
   game.cat.updatePosition();
-  game.stone.updatePosition();
 
   // Keep checking if there are collisions occur
-  game.checkCollision(game.cat, game.stone);
   game.checkCollisionList(game.cat, game.star_list);
+  game.checkCollisionList(game.cat, game.stone_list);
 
 
   // Update CSS positions for cat, stone, and stars
   updateCatCSSPosition();
   updateStoneCSSPosition();
   updateStarsCSSPosition();
-
-  
 
   // Keep updating our animation on screen by calling this mainLoop function
   requestAnimationFrame(mainLoop);

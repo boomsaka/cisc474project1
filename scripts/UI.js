@@ -35,18 +35,6 @@ function UI(){
                 key_handler.up = state;
             }
 
-            /** For moving obstacles */
-            else if(event.keyCode == 87){ // w
-                key_handler.w = state;
-            } else if(event.keyCode == 65){ // a
-                key_handler.a = state;
-            } else if(event.keyCode == 83){ // s
-                key_handler.s = state;
-            } else if(event.keyCode == 68){ // d
-                key_handler.d = state;
-            } 
-            /**************************** */
-
             event.preventDefault(); // tells the program to ignore the default behavior of the keys
         }
 
