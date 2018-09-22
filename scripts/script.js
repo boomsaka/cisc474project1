@@ -1,8 +1,9 @@
-/** Game includes 'world', 'cat', 'stone' */
+/** Game includes 'world', 'cat', 'stone', 'ledge'*/
 function Game(){
   this.world = new World(); // Creates the world which includes gravity and etc.
   this.cat = new Cat();     // Creates a cat 
   this.stone = new Stone(); 
+  this.ledge = new Ledge();
 
   this.init = function(){
     this.cat.cat_init();
@@ -11,10 +12,15 @@ function Game(){
   }
 
   // Checks collision between cat and obstacles
-  this.checkCollision = function(cat,obj){
-    if(Math.abs(cat.xPos- obj.xPos) < 100 && Math.abs(cat.yPos- obj.yPos) < 67){
-        $('#test').text("collision");
+  this.checkCollision = function(cat,obstacle){
+    if(Math.abs(cat.xPos- obstacle.xPos) < 100 && Math.abs(cat.yPos- obstacle.yPos) < 67){
+      $('#test').text("collision");
+      
+      // var pos = obstacle.yPos;
+      // console.log(pos == game.ledge.yPos);
     }
+
+    return obstacle.yPos;
   }
 }
 
@@ -82,12 +88,15 @@ function Cat(){
     /** Boundary Checking */
     // If the cat is reaching the BOTTOM ground
     if (this.yPos + cat_height >= (game.world.ground_level-5)) {
+      console.log("reaching ground")
+      console.log(this.yPos);
       this.yPos = 320;
       this.dy = 0;
       this.on_ground = true;
     } 
     // If the cat is reaching the TOP ground level
     else if (this.yPos <= 0){
+      console.log("reaching top ground")
       this.dy *= -1;
       this.on_ground = false;
     } 
@@ -97,6 +106,26 @@ function Cat(){
     } 
     else {
       this.on_ground = false;
+    }
+
+
+    // If the cat is jumping onto the ledge
+    if (Math.abs(this.xPos- game.ledge.xPos) < 100 && Math.abs(this.yPos- game.ledge.yPos) < 67) {
+      console.log("on ledge");
+      console.log(game.ledge.yPos - this.yPos);
+      if(this.on_ground == false) {
+        this.yPos = game.ledge.yPos - cat_height;
+        this.dy = 0;
+        this.on_ground = true;
+      } else if(this.on_ground == true && ui.keyHandler.right) {
+        console.log("else if statement*********");
+        this.dx = -this.move_speed;
+      } else if(this.on_ground == true && ui.keyHandler.left) {
+        console.log("else if statement*********");
+        this.dx = this.move_speed;
+      } 
+      this.dx *= game.world.ground_drag_force;
+      this.xPos += this.dx;
     }
   }
 
@@ -108,6 +137,17 @@ function Cat(){
     this.dx = 0;
     this.dy = 0;
   }
+}
+
+/** Ledge (such as houses) */
+function Ledge() {
+  this.xPos = 550;
+  this.yPos = 277;
+
+  var max_width = $('#playBoard').width();
+  var max_height = $('#playBoard').height();
+  var ledge_width = $('#ledge').width();
+  var ledge_height = $('#ledge').height(); 
 }
 
 /** Obstacles (stone for now) */
@@ -175,6 +215,7 @@ function mainLoop() { // time passed by requestAnimationFrame
 
   // Keep checking if there are collisions occur
   game.checkCollision(game.cat, game.stone);
+  game.checkCollision(game.cat, game.ledge);
 
   // Updates the cat image position according to the game.cat's object position
   $('#cat').css('top', game.cat.yPos + 'px');
@@ -183,6 +224,10 @@ function mainLoop() { // time passed by requestAnimationFrame
   // Updates the stone position accordingly
   $('#stone').css("top", game.stone.yPos+'px');
   $('#stone').css("left", game.stone.xPos+'px');
+
+   // Updates the ledge position accordingly
+   $('#ledge').css("top", game.ledge.yPos+'px');
+   $('#ledge').css("left", game.ledge.xPos+'px');
 
   // Keep updating our animation on screen by calling this mainLoop function
   requestAnimationFrame(mainLoop);
