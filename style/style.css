@@ -1,5 +1,5 @@
 #gameBoard{
-    width: 980px;    
+    width: 980px;
     height: 560px;
     border-style:solid;
     border-width:1px;
@@ -9,7 +9,7 @@
 }
 
 #test{
-    width: 100px;    
+    width: 100px;
     height: 200px;
     left: 1000px;
     position: absolute;

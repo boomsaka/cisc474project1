@@ -1,13 +1,13 @@
 /** Game includes 'world', 'cat', 'stone' */
 function Game(){
   this.world = new World(); // Creates the world which includes gravity and etc.
-  this.cat = new Cat();     // Creates a cat 
-  this.stone = new Stone(); 
+  this.cat = new Cat();     // Creates a cat
+  this.stone = new Stone();
 
   this.init = function(){
     this.cat.cat_init();
     // Paint the first frame of our game animation
-    requestAnimationFrame(mainLoop); 
+    requestAnimationFrame(mainLoop);
   }
 
   // Checks collision between cat and obstacles
@@ -70,11 +70,11 @@ function Cat(){
     this.updateXpos();
     // If the user pressed up key, and the cat is also on ground, make it jump
     if(ui.keyHandler.up && this.on_ground){ this.jump(); }
-  
+
     // Apply gravity and drag force to dx, dy
     this.dx *= game.world.ground_drag_force;
     this.dy += game.world.gravity;
-    
+
     // Update cat's position
     this.xPos += this.dx;
     this.yPos += this.dy;
@@ -85,16 +85,16 @@ function Cat(){
       this.yPos = 320;
       this.dy = 0;
       this.on_ground = true;
-    } 
+    }
     // If the cat is reaching the TOP ground level
     else if (this.yPos <= 0){
       this.dy *= -1;
       this.on_ground = false;
-    } 
+    }
     // If the cat is reaching the RIGHT boundary or the LEFT boundary
-    else if ((this.xPos + cat_width >= max_width) || this.xPos <= 0){ 
+    else if ((this.xPos + cat_width >= max_width) || this.xPos <= 0){
       this.dx = 0;
-    } 
+    }
     else {
       this.on_ground = false;
     }
@@ -121,7 +121,7 @@ function Stone(){
   var max_width = $('#playBoard').width();
   var max_height = $('#playBoard').height();
   var stone_width = $('#stone').width();
-  var stone_height = $('#stone').height(); 
+  var stone_height = $('#stone').height();
 
   this.updateXpos = function(){
     if (ui.keyHandler.a){ //left
@@ -130,7 +130,7 @@ function Stone(){
       } else {                       // if not
         this.dx = -this.move_speed; // move the stone by move_speed
       }
-    } 
+    }
     if(ui.keyHandler.d){ // right
       if (this.xPos + stone_width >= max_width){  // if the stone is at the RIGHT boundary
         this.dx = 0;                            // do not move the stone
@@ -157,7 +157,7 @@ function Stone(){
     // Apply drag force to dx, dy
     this.dx *= game.world.ground_drag_force;
     this.dy *= game.world.ground_drag_force;
-    
+
     // Update stone's position
     this.xPos += this.dx;
     this.yPos += this.dy;
@@ -187,3 +187,25 @@ function mainLoop() { // time passed by requestAnimationFrame
   // Keep updating our animation on screen by calling this mainLoop function
   requestAnimationFrame(mainLoop);
 }
+
+function startTimer(duration, display) {
+    let timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        display.textContent = minutes + ":" + seconds;
+        if (--timer < 0) {
+            timer = 0;
+            alert("Game Over!");
+        }
+    }, 1000);
+}
+
+
+window.onload = function () {
+    let twoMinutes = 120,
+        display = document.querySelector('#time');
+    startTimer(twoMinutes, display);
+};
