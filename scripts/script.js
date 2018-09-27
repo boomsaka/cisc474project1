@@ -8,11 +8,14 @@ STAR_HEIGHT = 49;
 CAT_WIDTH = $('#cat').width();
 CAT_HEIGHT = $('#cat').height();
 
+GROUND_LEVEL = $('#backgroundBoard').height() * .8;
+SECOND_LEVEL = $('#backgroundBoard').height() * .6;
+
 /** Game includes 'world', 'cat', 'stone' */
 function Game(){
   this.world = new World(); // Creates the world which includes gravity and etc.
   this.cat = new Cat();     // Creates a cat 
-  this.ledge = new Ledge(550, 320);
+  this.ledge = new Ledge(550, SECOND_LEVEL);
   this.star_list;
   this.stone_list;
 
@@ -114,7 +117,7 @@ function Game(){
 function World(){
   this.gravity  = 0.7; // the ground gravity (the smaller the #, the taller the cat is able to jump BUT the slower the cat falls down after jumped)
   this.ground_drag_force  = 0.7; // the smaller the #, the more friction the cat will experience on the ground
-  this.ground_level  = 370; // (cat_width = 67) + (cat's initial position = 320) = 387
+  this.ground_level = GROUND_LEVEL; // (cat_width = 67) + (cat's initial position = 320) = 387
 }
 
 /** Cat function */
@@ -175,7 +178,7 @@ function Cat(){
     /** Boundary Checking */
     // If the cat is reaching the BOTTOM ground
     if (this.yPos + CAT_HEIGHT >= (game.world.ground_level-5)) {
-      this.yPos = 300;
+      this.yPos = GROUND_LEVEL - $('#cat').height() -2;
       this.dy = 0;
       this.on_ground = true;
     } 
