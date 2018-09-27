@@ -22,13 +22,14 @@
 }
 
 #backgroundBoard{
-    background:url('../images/City.png');
-    background-size: contain;
+    background:url('../images/Background.png');
+    background-size: cover;
+    background-position-x: 0px;
     background-repeat: no-repeat;
     margin:10px 10px;
     width: 960px;
     height: 540px;
-    position: absolute;;
+    position: absolute;
 }
 
 #playBoard{

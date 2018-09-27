@@ -114,7 +114,7 @@ function Game(){
 function World(){
   this.gravity  = 0.7; // the ground gravity (the smaller the #, the taller the cat is able to jump BUT the slower the cat falls down after jumped)
   this.ground_drag_force  = 0.7; // the smaller the #, the more friction the cat will experience on the ground
-  this.ground_level  = 390; // (cat_width = 67) + (cat's initial position = 320) = 387
+  this.ground_level  = 370; // (cat_width = 67) + (cat's initial position = 320) = 387
 }
 
 /** Cat function */
@@ -175,7 +175,7 @@ function Cat(){
     /** Boundary Checking */
     // If the cat is reaching the BOTTOM ground
     if (this.yPos + CAT_HEIGHT >= (game.world.ground_level-5)) {
-      this.yPos = 320;
+      this.yPos = 300;
       this.dy = 0;
       this.on_ground = true;
     } 
