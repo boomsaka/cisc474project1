@@ -20,7 +20,7 @@ function UI(){
 
             /** Do we need to move obstacles? */
             /** For moving obstacles */
-            w: false, a: false, s: false, d: false
+            w: false, a: false, s: false, d: false,
             /**************************** */
         };
 
