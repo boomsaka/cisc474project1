@@ -42,10 +42,10 @@
 
 #cat{
     position: absolute;
-    background:url('../images/Cat.png');
+    background:url('../images/Cat.png') center;
     background-repeat: no-repeat;
     background-size:100px;
-    height:67px;
+    height:50px;
     width:90px;
     border-style:solid;
     border-width:1px;
@@ -64,7 +64,19 @@
     border-color:black;
 }
 
-#ledge{
+.ledge{
+    position: absolute;
+    background:url('../images/fly_ledge.png');
+    background-repeat: no-repeat;
+    background-size:100px;
+    height:40px;
+    width:100px;
+    border-style:solid;
+    border-width:1px;
+    border-color:red;
+}
+
+.block{
     position: absolute;
     background:url('../images/House.png');
     background-repeat: no-repeat;
