@@ -45,15 +45,9 @@
     position: absolute;
     background:url('../images/Cat.png') center;
     background-repeat: no-repeat;
-<<<<<<< HEAD
     background-size:contain;
     height:53px;
     width:100px;
-=======
-    background-size:100px;
-    height:50px;
-    width:90px;
->>>>>>> qilin
     border-style:solid;
     border-width:1px;
     border-color:black;
