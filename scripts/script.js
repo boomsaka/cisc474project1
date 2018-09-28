@@ -8,16 +8,18 @@ STAR_HEIGHT = 49;
 CAT_WIDTH = $('#cat').width();
 CAT_HEIGHT = $('#cat').height();
 
-GROUND_LEVEL = $('#backgroundBoard').height() * .8;
-SECOND_LEVEL = $('#backgroundBoard').height() * .6;
+BLOCK_SIDE = $('#backgroundBoard').height() * .2;
+GROUND_LEVEL = BLOCK_SIDE * 4;
+SECOND_LEVEL = BLOCK_SIDE * 3;
 
 /** Game includes 'world', 'cat', 'stone' */
 function Game(){
   this.world = new World(); // Creates the world which includes gravity and etc.
   this.cat = new Cat();     // Creates a cat 
-  this.ledge = new Ledge(550, SECOND_LEVEL);
+  this.ledge = new Ledge(BLOCK_SIDE, SECOND_LEVEL);
   this.star_list;
   this.stone_list;
+  this.ledge_list;
 
   this.init = function(){
     // Initialize the cat
@@ -26,11 +28,12 @@ function Game(){
     // Generate the stars and stone
     this.star_list = this.generateStars();
     this.stone_list = this.generateStones();
+    this.ledge_list = this.generateLedges();
 
     appendStarsToHTML(this.star_list); // css draw the stars according to how many 'star's there are in the html, 
                                        // and the 'star' elements in the html are generated from 'star_list'.
     appendStonesToHTML(this.stone_list);
-
+    appendLedgesToHTML(this.ledge_list);
     // Paint the first frame of our game animation
     requestAnimationFrame(mainLoop); 
   }
@@ -54,6 +57,12 @@ function Game(){
       new Stone(750, 320, 'stone3')
     ]
     return stone_list;
+  }
+
+  this.generateLedges = function(){
+    var ledge_list = [
+      new Ledge()
+    ]
   }
 
   // Checks collision between cat and a LIST OF obstacles

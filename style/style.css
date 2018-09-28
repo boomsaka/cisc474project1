@@ -24,7 +24,7 @@
 #backgroundBoard{
     background:url('../images/Background.png');
     background-size: cover;
-    background-position-x: -50px;
+    background-position-x: 0px;
     background-repeat: no-repeat;
     margin:10px 10px;
     width: 960px;
@@ -67,11 +67,8 @@
 
 #ledge{
     position: absolute;
-    background:url('../images/House.png');
-    background-repeat: no-repeat;
-    background-size:100px;
-    height:80px;
-    width:100px;
+    height:108px;
+    width:108px;
     border-style:solid;
     border-width:1px;
     border-color:black;
