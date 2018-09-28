@@ -73,11 +73,11 @@
 
 .ledge{
     position: absolute;
-    background:url('../images/fly_ledge.png');
+    /* background:url('../images/fly_ledge.png');
     background-repeat: no-repeat;
-    background-size:100px;
-    height:40px;
-    width:100px;
+    background-size:100px; */
+    height:108px;
+    width:108px;
     border-style:solid;
     border-width:1px;
     border-color:red;
