@@ -16,10 +16,9 @@ SECOND_LEVEL = BLOCK_SIDE * 3;
 function Game(){
   this.world = new World(); // Creates the world which includes gravity and etc.
   this.cat = new Cat();     // Creates a cat 
-  this.ledge = new Ledge(BLOCK_SIDE, SECOND_LEVEL);
   this.star_list;
   this.stone_list;
-  //this.ledge_list;
+  this.ledge_list;
 
   this.init = function(){
     // Initialize the cat
@@ -28,12 +27,15 @@ function Game(){
     // Generate the stars and stone
     this.star_list = this.generateStars();
     this.stone_list = this.generateStones();
-    //this.ledge_list = this.generateLedges();
+    this.block_list = this.generateBlocks();
+    this.ledge_list = this.generateLedges();
 
-    appendStarsToHTML(this.star_list); // css draw the stars according to how many 'star's there are in the html, 
-                                       // and the 'star' elements in the html are generated from 'star_list'.
+    // Append each item (star/stone/block) to the html according to the lists
+    appendStarsToHTML(this.star_list); 
     appendStonesToHTML(this.stone_list);
-   // appendLedgesToHTML(this.ledge_list);
+    appendBlocksToHTML(this.block_list);
+    appendLedgesToHTML(this.ledge_list);
+
     // Paint the first frame of our game animation
     requestAnimationFrame(mainLoop); 
   }
@@ -53,17 +55,27 @@ function Game(){
   this.generateStones = function(){
     var stone_list = [
       new Stone(100, 320, 'stone1'),
-      new Stone(250, 320, 'stone2'),
+      // new Stone(250, 320, 'stone2'),
       new Stone(750, 320, 'stone3')
     ]
     return stone_list;
   }
 
-  /* this.generateLedges = function(){
-    var ledge_list = [
-      new Ledge()
+  this.generateBlocks = function(){
+    var block_list = [
+      new Block(550, 320, 'block1') // x, y, block id
     ]
-  } */
+    return block_list;
+  }
+
+  this.generateLedges = function(){
+    var ledge_list = [
+      new Ledge(400, 330, 'ledge1'),
+      new Ledge(200, 230, 'ledge2'),
+      new Ledge(550, 230, 'ledge3')
+    ]
+    return ledge_list;
+  }
 
   // Checks collision between cat and a LIST OF obstacles
   this.checkCollisionList = function(cat, obstacleList){
@@ -98,10 +110,10 @@ function Game(){
         } else{} // if 'star' element doensn't exist, just pass
       }
       
-      // if the obstacle is a Stone or a Ledge
-      else if (obstacle_type == 'Stone'|| obstacle_type == "Ledge"){
-        // If the cat is jumping onto the ledge or stone ** Ledge & Stone collision checking
-        if (Math.abs(this.cat.xPos - obstacle.xPos) < obstacle.width && Math.abs(this.cat.yPos- obstacle.yPos) < obstacle.height) {
+      // if the obstacle is a Stone or a Block
+      else if (obstacle_type == 'Stone'|| obstacle_type == "Block"){
+        // If the cat is jumping onto the block or stone ** Block & Stone collision checking
+        if (Math.abs(this.cat.yPos- obstacle.yPos) < CAT_HEIGHT){
           if(this.cat.on_ground == false) {
             this.cat.yPos = obstacle.yPos - CAT_HEIGHT;
             this.cat.dy = 0;
@@ -117,19 +129,25 @@ function Game(){
           this.cat.xPos += this.cat.dx;
         }
       }
+
+      else if(obstacle_type == 'Ledge'){
+        // If the cat is jumping onto the ledge
+        if (Math.abs(this.cat.yPos- obstacle.yPos) < CAT_HEIGHT){
+          if(this.cat.on_ground == false) {
+            this.cat.yPos = obstacle.yPos - CAT_HEIGHT;
+            this.cat.dy = 0;
+            this.cat.on_ground = true;
+          }
+        }
+      }
     }
     return Object.getPrototypeOf(obstacle).constructor.name;
   } // checkCollision() ends
 }
+/******************************************************************************************************************** */
 
-/** World function */
-function World(){
-  this.gravity  = 0.7; // the ground gravity (the smaller the #, the taller the cat is able to jump BUT the slower the cat falls down after jumped)
-  this.ground_drag_force  = 0.7; // the smaller the #, the more friction the cat will experience on the ground
-  this.ground_level = GROUND_LEVEL; // (cat_width = 67) + (cat's initial position = 320) = 387
-}
 
-/** Cat function */
+/******************************************************* Cat function *********************************************** */
 function Cat(){
   var max_width = $('#gameBoard').width();
   var max_height = $('#gameBoard').height();
@@ -184,10 +202,11 @@ function Cat(){
     this.xPos += this.dx;
     this.yPos += this.dy;
 
+
     /** Boundary Checking */
     // If the cat is reaching the BOTTOM ground
     if (this.yPos + CAT_HEIGHT >= (game.world.ground_level-5)) {
-      this.yPos = GROUND_LEVEL - $('#cat').height() -2;
+      this.yPos = game.world.ground_level - CAT_HEIGHT;
       this.dy = 0;
       this.on_ground = true;
     } 
@@ -215,16 +234,22 @@ function Cat(){
     this.score = 0;
   }
 }
+/********************************************************************************************************************* */
 
-/** Ledge (such as houses) */
-function Ledge(xPos, yPos) {
+
+/********************************************** eatible Star ***********************************************************/
+function Star(xPos, yPos, starId){ // starId is the id name for the star object that will be created in the html file
   this.xPos = xPos;
   this.yPos = yPos;
-  this.width = 100;
-  this.height = 80;
+  this.starId = starId;
+  this.width = STAR_WIDTH;  // the star's width & height are used for collision checking
+  this.height = STAR_HEIGHT;
 }
+/********************************************************************************************************************* */
 
-/** Obstacles (stone for now) */
+
+/**************************************** Functions for Creating Obstacles ********************************************* */
+/** Stone */
 function Stone(xPos, yPos, stoneId){
   this.xPos = xPos;
   this.yPos = yPos;
@@ -233,15 +258,26 @@ function Stone(xPos, yPos, stoneId){
   this.height = 67;
 }
 
-/** Star */
-function Star(xPos, yPos, starId){ // starId is the id name for the star object that will be created in the html file
+/** Block (such as houses) */
+function Block(xPos, yPos, blockId) {
   this.xPos = xPos;
   this.yPos = yPos;
-  this.starId = starId;
-  this.width = STAR_WIDTH;  // the star's width & height are used for collision checking
-  this.height = STAR_HEIGHT;
+  this.blockId = blockId;
+  this.width = 100;
+  this.height = 80;
 }
 
+function Ledge(xPos, yPos, ledgeId){
+  this.xPos = xPos;
+  this.yPos = yPos;
+  this.ledgeId = ledgeId;
+  this.width = 100;
+  this.height = 40;
+}
+/********************************************************************************************************************* */
+
+
+/**************************************** Append Stars & Obstacles to HTML **************************************** */
 /** Append the star objects in star_list to html */
 function appendStarsToHTML(starList){
   // Create the list element
@@ -268,6 +304,33 @@ function appendStonesToHTML(stoneList){
   document.getElementById('stones').appendChild(stone_list);
 }
 
+function appendBlocksToHTML(blockList){
+  var block_list = document.createElement('div');
+
+  for(var i = 0; i < blockList.length; i++){
+      var block_item = document.createElement('div');
+      block_item.setAttribute('class', 'block');
+      block_item.setAttribute('id', blockList[i].blockId);
+      block_list.appendChild(block_item);
+  }
+  document.getElementById('blocks').appendChild(block_list);
+}
+
+function appendLedgesToHTML(ledgeList){
+  var ledge_list = document.createElement('div');
+
+  for(var i = 0; i < ledgeList.length; i++){
+      var ledge_item = document.createElement('div');
+      ledge_item.setAttribute('class', 'ledge');
+      ledge_item.setAttribute('id', ledgeList[i].ledgeId);
+      ledge_list.appendChild(ledge_item);
+  }
+  document.getElementById('ledges').appendChild(ledge_list);
+}
+/********************************************************************************************************************* */
+
+
+/************************************* Update Cat, Star & Obstacles CSS Positions ************************************ */
 function updateCatCSSPosition(){
   // Updates cat's position according to the game cat object position
   $('#cat').css('top', game.cat.yPos + 'px');
@@ -288,10 +351,22 @@ function updateStarsCSSPosition(){
   }
 }
 
-function updateLedgeCSSPosition(){
-  $('#ledge').css("left", game.ledge.xPos+'px');
-  $('#ledge').css("top", game.ledge.yPos+'px');
+function updateBlocksCSSPosition(){
+  for (var i = 0; i < game.block_list.length; i++) {
+    var block_id = '#' + game.block_list[i].blockId;
+    $(block_id).css("top", game.block_list[i].yPos + 'px');
+    $(block_id).css("left", game.block_list[i].xPos + 'px');
+  }
 }
+
+function updateLedgesCSSPosition(){
+  for (var i = 0; i < game.ledge_list.length; i++) {
+    var ledge_id = '#' + game.ledge_list[i].ledgeId;
+    $(ledge_id).css("top", game.ledge_list[i].yPos + 'px');
+    $(ledge_id).css("left", game.ledge_list[i].xPos + 'px');
+  }
+}
+/********************************************************************************************************************* */
 
 /** main animation loop */
 function mainLoop() { // time passed by requestAnimationFrame
@@ -307,13 +382,15 @@ function mainLoop() { // time passed by requestAnimationFrame
   // Keep checking if there are collisions occur
   game.checkCollisionList(game.cat, game.star_list);
   game.checkCollisionList(game.cat, game.stone_list);
-  game.checkCollision(game.cat, game.ledge);
+  game.checkCollisionList(game.cat, game.block_list);
+  game.checkCollisionList(game.cat, game.ledge_list);
 
   // Update CSS positions for cat, stone, and stars
   updateCatCSSPosition();
   updateStonesCSSPosition();
   updateStarsCSSPosition();
-  updateLedgeCSSPosition();
+  updateBlocksCSSPosition();
+  updateLedgesCSSPosition();
 
   // Keep updating our animation on screen by calling this mainLoop function
   requestAnimationFrame(mainLoop);
