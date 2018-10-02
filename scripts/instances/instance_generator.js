@@ -19,7 +19,7 @@ function generateStars() {
 
 function generateStones() {
     var stone_list = [
-    //   new Stone(200, 240, 'stone1'),
+      new Stone(320, 260, 'stone1'),
       // new Stone(250, 320, 'stone2'),
       // new Stone(750, 320, 'stone3')
     ]

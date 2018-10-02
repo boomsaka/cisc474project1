@@ -63,7 +63,6 @@ function Game() {
 
       else if (obstacle_type == 'Ledge') {
         collide_side = collide(game.cat, obstacle);
-        console.log(collide_side);
         ledgeCollision(obstacle, collide_side, this);
       }
     }
@@ -78,9 +77,8 @@ function collide(cat,obstacle){
   var dx  =  (cat.xPos + cat.width/2) - (obstacle.xPos + obstacle.width/2);
   var dy = (cat.yPos + cat.height/2) - (obstacle.yPos + obstacle.height/2);
 
-
-  var width = (cat.width + obstacle.width);
-  var height = (cat.height + obstacle.height);
+  var width = (cat.width + obstacle.width)/2;
+  var height = (cat.height + obstacle.height)/2;
   var crossWidth = width * dy;
   var crossHeight = height * dx;
   var collision = 'none';
@@ -125,7 +123,6 @@ function mainLoop() { // time passed by requestAnimationFrame
 
   // Update CSS positions for cat, stone, and stars
   updateCatCSSPosition();
-  updateStonesCSSPosition();
   updateBlocksCSSPosition();
 
   // Keep updating our animation on screen by calling this mainLoop function

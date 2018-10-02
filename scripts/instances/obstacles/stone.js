@@ -4,6 +4,7 @@ function Stone(xPos, yPos, stoneId) {
     this.stoneId = stoneId;
     this.width = 100; // the stone's width & height are used for check collision
     this.height = 67;
+    this.screenXPos = xPos;
 }
 
 function appendStonesToHTML(stoneList) {
@@ -18,11 +19,11 @@ function appendStonesToHTML(stoneList) {
     document.getElementById('stones').appendChild(stone_list);
 }
 
-function updateStonesCSSPosition() {
+function updateStonesCSSPosition(scroll_dist) {
     for (var i = 0; i < game.stone_list.length; i++) {
         var stone_id = '#' + game.stone_list[i].stoneId;
         $(stone_id).css("top", game.stone_list[i].yPos + 'px');
-        $(stone_id).css("left", game.stone_list[i].xPos + 'px');
+        $(stone_id).css("left", game.stone_list[i].screenXPos+scroll_dist + 'px');
     }
 }
 
@@ -39,8 +40,9 @@ function stoneCollision(obstacle, collide_side, game){
     else if(collide_side == 'right' && ui.keyHandler.left){
         game.cat.dx = game.cat.move_speed;
     } 
-    else if (collide_side == 'bottom' && ui.keyHandler.up){ // bottom collision check (might need to be fixed)
-        game.cat.dy = 0;
+    // when collides at the bottom & (the cat is going up || the user is pressing the up key)
+    else if (collide_side == 'bottom' && (game.cat.dy < 0 || ui.keyHandler.up)){ 
+        game.cat.dy = game.cat.move_speed;
     }
     game.cat.dx *= game.world.ground_drag_force;
     game.cat.xPos += game.cat.dx;

@@ -18,8 +18,8 @@ function Cat() {
     this.height = CAT_HEIGHT;
     this.score = 0;
     this.screenXPos = 0;
-    this.is_jumping = false;
-    this.is_landing = false;
+    // this.is_jumping = false;
+    // this.is_landing = false;
   
     // Update the cat's x position accordingly
     this.updateXpos = function () {
@@ -61,19 +61,19 @@ function Cat() {
       this.xPos += this.dx;
       this.yPos += this.dy;
 
-      // Update is_jumping
-      if (!this.on_ground){
-        this.is_jumping = true;
-      } else{
-        this.is_jumping = false;
-      }
+      // // Update is_jumping
+      // if (!this.on_ground){
+      //   this.is_jumping = true;
+      // } else{
+      //   this.is_jumping = false;
+      // }
 
-      // Update is_landed
-      if (!this.on_ground && this.dy < 0){ // when the cat is not on ground & is falling
-        this.is_landing = true;
-      } else{
-        this.is_landing = false;
-      }
+      // // Update is_landed
+      // if (!this.on_ground && this.dy < 0){ // when the cat is not on ground & is falling
+      //   this.is_landing = true;
+      // } else{
+      //   this.is_landing = false;
+      // }
   
   
       /** Boundary Checking */
@@ -123,6 +123,7 @@ function updateCatCSSPosition() {
     $('#cat').css('left', game.cat.xPos + 'px');
     updateStarsCSSPosition(0);
     updateLedgesCSSPosition(0);
+    updateStonesCSSPosition(0);
   }
   //cat is to the right of where screen stops scrolling
   else if (game.cat.xPos + CAT_WIDTH > (2000 - middle)) {
@@ -132,5 +133,6 @@ function updateCatCSSPosition() {
     $('#backgroundBoard').css('background-position-x', (game.cat.xPos * -1 + middle) + 'px');
     updateStarsCSSPosition(game.cat.xPos * -1 + middle);
     updateLedgesCSSPosition(game.cat.xPos * -1 + middle);
+    updateStonesCSSPosition(game.cat.xPos * -1 + middle);
   }
 }
