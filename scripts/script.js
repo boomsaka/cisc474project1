@@ -164,7 +164,7 @@ function Cat() {
   this.dx = 0; // delta x and y
   this.dy = 0;
   this.on_ground = false; // checks if the Cat currently on the ground
-  this.jump_power = -16;  // power of the cat's jump, the smaller the #, the higher the cat is able to jump
+  this.jump_power = -10;  // power of the cat's jump, the smaller the #, the higher the cat is able to jump
   this.move_speed = 5;    // the speed of the cat moving right and left
   this.width = CAT_WIDTH; // The cat's width & height are used for collision checking
   this.height = CAT_HEIGHT;
@@ -199,7 +199,7 @@ function Cat() {
     // Make the cat go left or right or jump according to the user's press on keys
     this.updateXpos();
     // If the user pressed up key, and the cat is also on ground, make it jump
-    if (ui.keyHandler.up && this.on_ground) { this.jump(); }
+    if (ui.keyHandler.up) { if(this.yPos>100){this.jump();}}
 
     // Apply gravity and drag force to dx, dy
     this.dx *= game.world.ground_drag_force;
