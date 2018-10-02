@@ -22,13 +22,14 @@
 }
 
 #backgroundBoard{
-    background:url('../images/City.png');
-    background-size: contain;
+    background:url('../images/Background.png');
+    background-size: cover;
+    background-position-x: 0px;
     background-repeat: no-repeat;
     margin:10px 10px;
     width: 960px;
     height: 540px;
-    position: absolute;;
+    position: absolute;
 }
 
 #playBoard{
@@ -44,9 +45,9 @@
     position: absolute;
     background:url('../images/Cat.png') center;
     background-repeat: no-repeat;
-    background-size:100px;
-    height:50px;
-    width:90px;
+    background-size:contain;
+    height:53px;
+    width:100px;
     border-style:solid;
     border-width:1px;
     border-color:black;
@@ -66,11 +67,11 @@
 
 .ledge{
     position: absolute;
-    background:url('../images/fly_ledge.png');
+    /* background:url('../images/fly_ledge.png');
     background-repeat: no-repeat;
-    background-size:100px;
-    height:40px;
-    width:100px;
+    background-size:100px; */
+    height:108px;
+    width:108px;
     border-style:solid;
     border-width:1px;
     border-color:red;
@@ -78,14 +79,12 @@
 
 .block{
     position: absolute;
-    background:url('../images/House.png');
-    background-repeat: no-repeat;
-    background-size:100px;
-    height:80px;
-    width:100px;
+    height:108px;
+    width:108px;
     border-style:solid;
     border-width:1px;
     border-color:black;
+    overflow: hidden;
 }
 
 .star{
