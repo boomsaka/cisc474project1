@@ -23,8 +23,9 @@ function appendLedgesToHTML(ledgeList) {
 function updateLedgesCSSPosition(scroll_dist) {
     for (var i = 0; i < game.ledge_list.length; i++) {
         var ledge_id = '#' + game.ledge_list[i].ledgeId;
+        var tempX = game.ledge_list[i].screenXPos+scroll_dist;
         $(ledge_id).css("top", game.ledge_list[i].yPos + 'px');
-        $(ledge_id).css("left", game.ledge_list[i].screenXPos+scroll_dist + 'px');
+        $(ledge_id).css("left", tempX + 'px');
     }
 }
 
