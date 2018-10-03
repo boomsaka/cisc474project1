@@ -1,36 +1,31 @@
-/**
- * Use 'generateStars()' in 'instance_generator.js' to add stars.
- */
-
-/** Game includes 'world', 'cat', 'stone' */
+/** Game includes 'world', 'cat', 'brick' */
 function Game() {
   this.world = new World(); // Creates the world which includes gravity and etc.
   this.cat = new Cat();     // Creates a cat 
   this.star_list;
-  this.stone_list;
+  this.brick_list;
   this.ledge_list;
+  // this.floating_list;
 
   this.init = function () {
     // Initialize the cat
     this.cat.cat_init();
 
-    // Generate the stars and stone
+    // Generate the stars and brick
     this.star_list = generateStars();
-    this.stone_list = generateStones();
-    this.block_list = generateBlocks();
+    this.brick_list = generateBricks();
     this.ledge_list = generateLedges();
+    // this.floating_list = generateFloatings();
 
-    // Append each item (star/stone/block) to the html according to the lists
-    appendStarsToHTML(this.star_list);
-    appendStonesToHTML(this.stone_list);
-    appendBlocksToHTML(this.block_list);
-    appendLedgesToHTML(this.ledge_list);
+    // Append each item (star/brick/ledge) to the html according to the lists
+    appendInstanceToHTML(this.star_list, 'stars', 'star');
+    appendInstanceToHTML(this.brick_list, 'bricks', 'brick');
+    appendInstanceToHTML(this.ledge_list, 'ledges', 'ledge');
+    // appendInstanceToHTML(this.floating_list, 'floatings', 'floating');
 
     // Paint the first frame of our game animation
     requestAnimationFrame(mainLoop);
   }
-
-  
 
   // Checks collision between cat and a LIST OF obstacles
   this.checkCollisionList = function (cat, obstacleList) {
@@ -42,7 +37,7 @@ function Game() {
 
   // Checks collision between cat and a SINGLE obstacle
   this.checkCollision = function (cat, obstacle, obstacle_index) {
-    // Get the type of the obstacle (ex. Stone, Star, etc)
+    // Get the type of the obstacle (ex. Brick, Star, etc)
     var obstacle_type = Object.getPrototypeOf(obstacle).constructor.name;
 
     var offset = 0;
@@ -55,16 +50,20 @@ function Game() {
         starCollision(obstacle, obstacle_index, this);
       }
 
-      else if (obstacle_type == 'Stone'|| obstacle_type == "Block"){
+      else if (obstacle_type == 'Brick'){
         collide_side = collide(game.cat, obstacle)
-        stoneCollision(obstacle, collide_side, this);
-        // checkBlockCollision(obstacle, this);
+        brickCollision(obstacle, collide_side, this);
       }
 
       else if (obstacle_type == 'Ledge') {
         collide_side = collide(game.cat, obstacle);
         ledgeCollision(obstacle, collide_side, this);
       }
+
+      // else if (obstacle_type == 'Floating'){
+      //   collide_side = collide(game.cat, obstacle);
+      //   floatingCollision(obstacle, collide_side, this);
+      // }
     }
 
     return Object.getPrototypeOf(obstacle).constructor.name;
@@ -95,15 +94,6 @@ function collide(cat,obstacle){
 }
 
 
-
-
-
-
-
-
-
-
-
 /** main animation loop */
 function mainLoop() { // time passed by requestAnimationFrame
   // Updates the collision text
@@ -117,14 +107,13 @@ function mainLoop() { // time passed by requestAnimationFrame
 
   // Keep checking if there are collisions occur
   game.checkCollisionList(game.cat, game.star_list);
-  game.checkCollisionList(game.cat, game.stone_list);
-  game.checkCollisionList(game.cat, game.block_list);
+  game.checkCollisionList(game.cat, game.brick_list);
   game.checkCollisionList(game.cat, game.ledge_list);
+  // game.checkCollisionList(game.cat, game.floating_list);
 
-  // Update CSS positions for cat, stone, and stars
+  // Update CSS positions for cat, brick, and stars
   updateCatCSSPosition();
-  updateBlocksCSSPosition();
-
+  
   // Keep updating our animation on screen by calling this mainLoop function
   requestAnimationFrame(mainLoop);
 }

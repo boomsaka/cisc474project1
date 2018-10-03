@@ -21,11 +21,35 @@
     padding:0;
 }
 
-#backgroundBoard{
-    background:url('../images/Background.png');
-    background-size: cover;
+#startScreen{
+    background:url('../images/Start_Screen.png');
+    background-size: contain;
     background-position-x: 0px;
     background-repeat: no-repeat;
+    margin:10px 10px;
+    width: 960px;
+    height: 540px;
+    position: absolute;
+}
+
+#startGameButton{
+    background-color: transparent;
+    width: 280px;    
+    height: 125px;
+    left: 355px;
+    top: 280px;
+    position: absolute;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+
+#backgroundBoard{
+    background:url('../images/Background3.png');
+    background-size: cover;
+    background-position-x: 0px;
+    background-repeat: repeat;
     margin:10px 10px;
     width: 960px;
     height: 540px;
@@ -53,39 +77,40 @@
     border-color:black;
 }
 
-.stone{
+.brick{
     position: absolute;
-    background:url('../images/Stone.png');
+    background:url('../images/brick_1.png');
     background-repeat: no-repeat;
-    background-size:100px;
-    height:67px;
-    width:100px;
-    border-style:solid;
+    background-size: cover;
+    /* border-style:solid;
     border-width:1px;
-    border-color:black;
+    border-color:black; */
 }
 
 .ledge{
     position: absolute;
-    /* background:url('../images/fly_ledge.png');
+    background:url('../images/fly_ledge.png');
+    background-size: contain;
     background-repeat: no-repeat;
+    /*background-repeat: no-repeat;
     background-size:100px; */
-    height:108px;
-    width:108px;
-    border-style:solid;
+    /* height:108px;
+    width:108px; */
+    /* border-style:solid;
     border-width:1px;
-    border-color:red;
+    border-color:red; */
 }
 
-.block{
+.floating{
     position: absolute;
-    height:108px;
-    width:108px;
-    border-style:solid;
+    background:url('../images/fly_ledge.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    /* border-style:solid;
     border-width:1px;
-    border-color:black;
-    overflow: hidden;
+    border-color:red; */
 }
+
 
 .star{
     position: absolute;
@@ -94,9 +119,9 @@
     background-size:45px;
     height:49px;
     width:45px;
-    border-style:solid;
+    /* border-style:solid;
     border-width:1px;
-    border-color:black;
+    border-color:black; */
 }
 
 #scoreboard{
@@ -111,3 +136,4 @@
     margin:0;
     padding:0;
 }
+

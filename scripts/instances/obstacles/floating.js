@@ -1,17 +1,16 @@
-
-function Ledge(xPos, yPos, width, height, id) {
+function Floating(xPos, yPos, width, height, id) {
     this.xPos = xPos;
     this.yPos = yPos;
     this.id = id;
-    this.width = width;
+    this.width = width; // the stone's width & height are used for check collision
     this.height = height;
     this.screenXPos = xPos;
 }
 
-function ledgeCollision(obstacle, collide_side, game){
-    // If the cat is jumping onto the ledge & and the cat is falling downwards
-    if (collide_side == 'top' && game.cat.dy > 0) {
-        game.cat.yPos = obstacle.yPos - CAT_HEIGHT;
+function floatingCollision(obstacle, collide_side, game){
+    // If the cat is jumping onto the block or stone ** Block & Stone collision checking
+    if (collide_side == 'top' && game.cat.dy > 0){
+        game.cat.yPos = obstacle.yPos - game.cat.height;
         game.cat.dy = 0;
         game.cat.on_ground = true;
     }
@@ -25,6 +24,7 @@ function ledgeCollision(obstacle, collide_side, game){
     else if (collide_side == 'bottom' && (game.cat.dy < 0 || ui.keyHandler.up)){ 
         game.cat.dy = game.cat.move_speed;
     }
-    // game.cat.dx *= game.world.ground_drag_force;
-    // game.cat.xPos += game.cat.dx;
+    game.cat.dx *= game.world.ground_drag_force;
+    game.cat.xPos += game.cat.dx;
+    
 }

@@ -115,15 +115,25 @@ function updateCatCSSPosition() {
   // Updates cat's position according to the game cat object position
   $('#cat').css('top', game.cat.yPos + 'px');
 
+  if (ui.keyHandler.left){
+    console.log('left');
+    $('#cat').css('-webkit-transform', 'scaleX(-1)');
+    $('#cat').css('-transform', 'scaleX(-1)');
+  } else if (ui.keyHandler.right) {
+    $('#cat').css('-webkit-transform', 'scaleX(1)');
+    $('#cat').css('-transform', 'scaleX(1)');
+  }
+
   var middle = $('#gameBoard').width() / 2 - CAT_WIDTH / 2;
   var dist_traveled = (2000 - middle) - CAT_WIDTH;
   
   //cat is to the left of where screen starts scrolling
   if (game.cat.xPos < middle) {
     $('#cat').css('left', game.cat.xPos + 'px');
-    updateStarsCSSPosition(0);
-    updateLedgesCSSPosition(0);
-    updateStonesCSSPosition(0);
+    updateInstanceCSSPosition(game.star_list, 0);
+    updateInstanceCSSPosition(game.ledge_list, 0);
+    updateInstanceCSSPosition(game.brick_list, 0);
+    // updateInstanceCSSPosition(game.floating_list, 0);
   }
   //cat is to the right of where screen stops scrolling
   else if (game.cat.xPos + CAT_WIDTH > (2000 - middle)) {
@@ -131,8 +141,9 @@ function updateCatCSSPosition() {
   }
   else {
     $('#backgroundBoard').css('background-position-x', (game.cat.xPos * -1 + middle) + 'px');
-    updateStarsCSSPosition(game.cat.xPos * -1 + middle);
-    updateLedgesCSSPosition(game.cat.xPos * -1 + middle);
-    updateStonesCSSPosition(game.cat.xPos * -1 + middle);
+    updateInstanceCSSPosition(game.star_list, game.cat.xPos * -1 + middle);
+    updateInstanceCSSPosition(game.ledge_list, game.cat.xPos * -1 + middle);
+    updateInstanceCSSPosition(game.brick_list, game.cat.xPos * -1 + middle);
+    // updateInstanceCSSPosition(game.floating_list, game.cat.xPos * -1, middle);
   }
 }
