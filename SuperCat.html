@@ -3,35 +3,49 @@
     <head>
         <title>Test</title>
         <link rel="stylesheet" href="./style/style.css" type="text/css">
-        <script type='text/javascript' src="./scripts/UI.js"></script>
-        <script type='text/javascript' src="./scripts/jquery.js"></script>
+        <script type='text/javascript' src="./scripts/controller/UI.js"></script>
+        <script type='text/javascript' src="./scripts/world.js"></script>
+        <script type='text/javascript' src="./scripts/states.js"></script>
+        <script type='text/javascript' src="./scripts/util/jquery.js"></script>
     </head>
 
     <body>
         <div id="mainContent">
-            <div id="gameBoard">
+            <div id="startScreen">
+                <button id="startGameButton" onclick="gameStart()"></button>
+            </div>
 
+            <div id="gameBoard" style="display: none;">
                 <div id="backgroundBoard">
-                    <div id="stone"></div>
                     <div id="stars"></div>
-                    <div id="stones"></div>
-                    <div id="ledge"></div>
-
+                    <div id="bricks"></div>
+                    <div id="blocks"></div>
+                    <div id="ledges"></div>
+                    <!-- <div id="floatings"></div> -->
+                    
                     <div id="cat"></div>
                     <div id= "test"></div>
-                    <div id="scoreboard"></div>
+                    <div id="scoreboard">
+                        <p id='scoreStar'></p>
+                        <p id='score'></p>
+                    </div>
+
+                    <div id="timerboard">
+                        <p id='timerPng'></p>
+                        <p id='time'></p>
+                        <p id='seconds'> s</p>
+                    </div>
                 </div>
-
-                <!-- <div id="playBoard">
-                    <div id="cat"></div>
-                    <div id= "test"></div>
-                    <div id="scoreboard"></div>
-                </div> -->
-                
             </div>
         </div>
-
-        <script type='text/javascript' src="./scripts/script.js"></script>
+        <script type='text/javascript' src="./scripts/cat.js"></script>
+        <script type='text/javascript' src="./scripts/instances/eatibles/star.js"></script>
+        <script type='text/javascript' src="./scripts/instances/obstacles/ledge.js"></script>
+        <script type='text/javascript' src="./scripts/instances/obstacles/stone.js"></script>
+        <script type='text/javascript' src="./scripts/instances/obstacles/floating.js"></script>
+        <script type='text/javascript' src="./scripts/instances/instance_generator.js"></script>
+        <script type='text/javascript' src="./scripts/timer.js"></script>
+        <script type='text/javascript' src="./scripts/game.js"></script>
         <script type='text/javascript' src="./scripts/main.js"></script>
     </body>
 
