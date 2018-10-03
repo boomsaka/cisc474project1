@@ -1,9 +1,8 @@
 CAT_WIDTH = $('#cat').width();
 CAT_HEIGHT = $('#cat').height();
+MAX_WIDTH = 5000;
 
 function Cat() {
-    var max_width = 2000;
-    //var max_width = $('#gameBoard').width();
     var max_height = $('#gameBoard').height();
   
     // Cat attributes
@@ -31,7 +30,7 @@ function Cat() {
         }
       }
       if (ui.keyHandler.right) {                    // if the user pressed 'right' key
-        if (this.xPos + CAT_WIDTH >= max_width) {  // if the cat is at the RIGHT boundary
+        if (this.xPos + CAT_WIDTH >= MAX_WIDTH) {  // if the cat is at the RIGHT boundary
           this.dx = 0;                            // do not move the cat
         } else {                                   // if not
           this.dx = this.move_speed;              // move the cat by move_speed
@@ -90,7 +89,7 @@ function Cat() {
         this.on_ground = false;
       }
       // If the cat is reaching the RIGHT boundary or the LEFT boundary
-      else if ((this.xPos + CAT_WIDTH >= max_width) || this.xPos <= 0) {
+      else if ((this.xPos + CAT_WIDTH >= MAX_WIDTH) || this.xPos <= 0) {
         this.dx = 0;
       }
       else {
@@ -102,7 +101,7 @@ function Cat() {
     this.cat_init = function () {
       this.xPos = 0;
       this.screenXPos = 0;
-      //this.xPos = max_width / 2 - CAT_WIDTH/2; // calculates the cat's x position to be at the center
+      //this.xPos = MAX_WIDTH / 2 - CAT_WIDTH/2; // calculates the cat's x position to be at the center
       this.yPos = game.world.ground_level;
       this.on_ground = true;
       this.dx = 0;
@@ -125,7 +124,7 @@ function updateCatCSSPosition() {
   }
 
   var middle = $('#gameBoard').width() / 2 - CAT_WIDTH / 2;
-  var dist_traveled = (2000 - middle) - CAT_WIDTH;
+  var dist_traveled = (MAX_WIDTH - middle) - CAT_WIDTH;
   
   //cat is to the left of where screen starts scrolling
   if (game.cat.xPos < middle) {
@@ -136,7 +135,7 @@ function updateCatCSSPosition() {
     // updateInstanceCSSPosition(game.floating_list, 0);
   }
   //cat is to the right of where screen stops scrolling
-  else if (game.cat.xPos + CAT_WIDTH > (2000 - middle)) {
+  else if (game.cat.xPos + CAT_WIDTH > (MAX_WIDTH - middle)) {
     $('#cat').css('left', game.cat.xPos - dist_traveled + middle + 'px');
   }
   else {

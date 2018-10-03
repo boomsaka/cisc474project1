@@ -16,19 +16,18 @@ function ledgeCollision(obstacle, collide_side, game){
         game.cat.on_ground = true;
     }
 
-    if (obstacle.ledge_pic=='fly_ledge'){
-        if(collide_side == 'left' && ui.keyHandler.right){
-            game.cat.dx = -game.cat.move_speed;
-        } 
-        else if(collide_side == 'right' && ui.keyHandler.left){
-            game.cat.dx = game.cat.move_speed;
-        } 
-        // when collides at the bottom & (the cat is going up || the user is pressing the up key)
-        else if (collide_side == 'bottom' && (game.cat.dy < 0 || ui.keyHandler.up)){ 
-            game.cat.dy = game.cat.move_speed;
-        }
-        // game.cat.dx *= game.world.ground_drag_force;
-        // game.cat.xPos += game.cat.dx;
+    if(collide_side == 'left' && ui.keyHandler.right){
+        game.cat.dx = -game.cat.move_speed;
+    } 
+    else if(collide_side == 'right' && ui.keyHandler.left){
+        game.cat.dx = game.cat.move_speed;
+    } 
+    // when collides at the bottom & (the cat is going up || the user is pressing the up key)
+    else if (collide_side == 'bottom' && (game.cat.dy < 0 || ui.keyHandler.up)){ 
+        game.cat.dy = game.cat.move_speed;
     }
+    // game.cat.dx *= game.world.ground_drag_force;
+    game.cat.xPos += game.cat.dx;
+    
 
 }

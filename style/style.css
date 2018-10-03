@@ -6,7 +6,7 @@
     border-color:black;
     margin:0;
     padding:0;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 #test{
@@ -33,6 +33,19 @@
     position: absolute;
 }
 
+#endScreen{
+    background:url('../images/Background2.png');
+    background-size: contain;
+    background-position-x: 0px;
+    background-repeat: no-repeat;
+    margin:10px 10px;
+    width: 960px;
+    height: 540px;
+    position: absolute;
+    visibility:hidden;
+}
+
+
 #startGameButton{
     background-color: transparent;
     width: 280px;    
@@ -45,7 +58,18 @@
     overflow: hidden;
     outline:none;
 }
-
+#restartGameButton{
+    background-color: white;
+    width: 280px;    
+    height: 125px;
+    left: 355px;
+    top: 280px;
+    position: absolute;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
 #backgroundBoard{
     background:url('../images/Background3.png');
     background-size: cover;
@@ -55,7 +79,7 @@
     width: 960px;
     height: 540px;
     position: absolute;
-    overflow: hidden;
+    overflow: scroll;
 
 }
 
@@ -72,9 +96,9 @@
     position: absolute;
     background:url('../images/Cat.png') center;
     background-repeat: no-repeat;
-    background-size:contain;
+    background-size:cover;
     height:53px;
-    width:100px;
+    width:90px;
     border-style:solid;
     border-width:1px;
     border-color:black;
@@ -85,9 +109,9 @@
     background:url('../images/brick_1.png');
     background-repeat: no-repeat;
     background-size: cover;
-    /* border-style:solid;
+    border-style:solid;
     border-width:1px;
-    border-color:black; */
+    border-color:black;
 }
 
 .ledge{
@@ -176,6 +200,22 @@
     padding:0;
 }
 
+#finalScore{
+    position: absolute;
+    text-align: center;
+    left: 62px;
+    top: 22px;
+    color: black;
+    width: 30px;    
+    height: 30px;
+    font-size: 24px;;
+    font-weight: bold;
+    /* border-style:solid;
+    border-width:1px;
+    border-color:purple; */
+    margin:0;
+    padding:0;
+}
 
 
 
@@ -244,5 +284,5 @@
     margin:0;
     padding:0;
 }
-}
+
 

@@ -5,6 +5,8 @@ function Game() {
   this.star_list;
   this.brick_list;
   this.ledge_list;
+  this.total_time = 300;
+  this.time = this.total_time;
   // this.floating_list;
 
   this.init = function () {
@@ -96,12 +98,18 @@ function collide(cat,obstacle){
 
 /** main animation loop */
 function mainLoop() { // time passed by requestAnimationFrame
+  // Update timer
+  $('#time').text(Math.ceil((game.time--)/100));
+  if(game.time<0){
+    gameEnd();
+    $('#finalScore').text("finalScore");
+
+  }
   // Updates the collision text
   $('#test').text("cat \nxPos: " + game.cat.xPos + "\nyPos: " + game.cat.yPos);
 
   // Update the score
   $('#score').text(game.cat.score);
-
 
   // Keep updating the game.cat's object position
   game.cat.updatePosition();

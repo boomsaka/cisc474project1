@@ -1,6 +1,6 @@
 // image is broken up into 5 rows of 216 pixels
 BLOCK = $('#backgroundBoard').height() * .2; // 108
-BRICK_WIDTH = 80;
+BRICK_WIDTH = 79;
 BRICK_HEIGHT = 76;
 
 LEDGE_WIDTH = 90;
@@ -35,14 +35,14 @@ function generateStars() {
 
     this.generateStarsAtSpecifiedPosition = function(){
         var star_lst = [
-            new Star(680, 310, 'star20'),
-            new Star(740, 330, 'star21'),
-            new Star(800, 350, 'star22'),
-            new Star(850, 370, 'star23'),
-            new Star(680, 360, 'star24'),
-            new Star(680, 410, 'star25'),
-            new Star(740, 390, 'star26'),
-            new Star(800, 410, 'star27'),
+            // new Star(680, 310, 'star20'),
+            // new Star(740, 330, 'star21'),
+            // new Star(800, 350, 'star22'),
+            // new Star(850, 370, 'star23'),
+            // new Star(680, 360, 'star24'),
+            // new Star(680, 410, 'star25'),
+            // new Star(740, 390, 'star26'),
+            // new Star(800, 410, 'star27'),
         ]
         return star_lst;
     }
@@ -56,7 +56,7 @@ function generateStars() {
 
 function generateBricks() {
     this.generateTripleBricks = function(starting_x, starting_id){
-        var gap = 50;   // the gap space between bricks
+        var gap = 100;   // the gap space between bricks
         var offset = 4;
         var ids = ['brick' + starting_id, 'brick' + starting_id+1, 'brick' + starting_id+2, 'brick' + starting_id+3, 'brick' + starting_id+4, 'brick' + starting_id+5];
         var brick_lst = [
@@ -73,9 +73,28 @@ function generateBricks() {
         return brick_lst;
     }
 
-    brick_list = this.generateTripleBricks(320, 1); // next triple brick should have starting id = 6, next next should be 12
+    this.generateTripleBricksBackwards = function(starting_x, starting_id){
+        var gap = 100;   // the gap space between bricks
+        var offset = 4;
+        var ids = ['brick' + starting_id, 'brick' + starting_id+1, 'brick' + starting_id+2, 'brick' + starting_id+3, 'brick' + starting_id+4, 'brick' + starting_id+5];
+        var brick_lst = [
+            new Brick(starting_x + BRICK_WIDTH * 2 + gap*2,  ground_level - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[0]),
 
+            new Brick(starting_x + BRICK_WIDTH + gap, ground_level - BRICK_HEIGHT*2 + offset, BRICK_WIDTH, BRICK_HEIGHT, ids[1]),
+            new Brick(starting_x + BRICK_WIDTH + gap, ground_level - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[2]),
 
+            new Brick(starting_x, ground_level - BRICK_HEIGHT*3 + offset*2, BRICK_WIDTH, BRICK_HEIGHT, ids[3]),
+            new Brick(starting_x, ground_level - BRICK_HEIGHT*2 + offset, BRICK_WIDTH, BRICK_HEIGHT, ids[4]),
+            new Brick(starting_x, ground_level - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[5]),
+        ]
+
+        return brick_lst;
+    }
+
+    brick_list = this.generateTripleBricks(320, 1).concat
+                 (this.generateTripleBricks(1850, 7)).concat
+                 (this.generateTripleBricksBackwards(2500, 20));
+    
     return brick_list;
 }
 
@@ -102,8 +121,16 @@ function generateLedges() {
         return ledge_lst;
     }    
 
-    var ledge_list = this.generateTripleLedgesDownward(700, 250, 1).concat
-                    (this.generateTripleLedgesUpward(1300, 400, 4))
+    var ledge_list = this.generateTripleLedgesDownward(800, 250, 1).concat
+                    (this.generateTripleLedgesUpward(1500, 400, 5)).concat
+                    (new Ledge(1100, 280, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1000')).concat
+                    (this.generateTripleLedgesUpward(1200, 200, 10)).concat
+                    (new Ledge(1550, 210, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1001')).concat
+                    (this.generateTripleLedgesUpward(5000, 200, 20)).concat
+                    (new Ledge(2350, 300, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1002')).concat
+                    (this.generateTripleLedgesUpward(2100, 150, 25)).concat
+                    (new Ledge(1900, 200, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1003'));
+                    
 
     // var ledge_list = [
     // //   new Ledge(BLOCK,      BLOCK * 3,  BLOCK * 2, 'ledge1'),
