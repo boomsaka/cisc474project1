@@ -4,23 +4,35 @@
         <title>Test</title>
         <link rel="stylesheet" href="./style/style.css" type="text/css">
         <script type='text/javascript' src="./scripts/UI.js"></script>
+        <script type='text/javascript' src="./scripts/world.js"></script>
         <script type='text/javascript' src="./scripts/jquery.js"></script>
     </head>
 
     <body>
         <div id="mainContent">
             <div id="gameBoard">
-                <div id="playBoard">
-                    <div id="cat"></div>
+
+                <div id="backgroundBoard">
                     <div id="stone"></div>
+                    <div id="stars"></div>
+                    <div id="stones"></div>
+                    <div id="blocks"></div>
+                    <div id="ledges"></div>
+
+                    <div id="cat"></div>
                     <div id= "test"></div>
-                    <div>Hurry up! Game ends in: <span id="time">02:00</span> minutes!
-                    </div>
+                    <div id = 'timeText'>Game ends in: <span id="time">30</span> seconds!</div>
+                    <div id="scoreboard"></div>
                 </div>
+
+                <!-- <div id="playBoard">
+                    <div id="cat"></div>
+                    <div id= "test"></div>
+                    <div id="scoreboard"></div>
+                </div> -->
+
             </div>
         </div>
-
-
         <script type='text/javascript' src="./scripts/script.js"></script>
         <script type='text/javascript' src="./scripts/main.js"></script>
     </body>
