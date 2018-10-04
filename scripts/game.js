@@ -5,7 +5,7 @@ function Game() {
   this.star_list;
   this.brick_list;
   this.ledge_list;
-  this.total_time = 20000;
+  this.total_time = 500;
   this.time = this.total_time;
   // this.floating_list;
 
@@ -102,7 +102,7 @@ function mainLoop() { // time passed by requestAnimationFrame
   $('#time').text(Math.ceil((game.time--)/100));
   if(game.time<0){
     gameEnd();
-    $('#finalScore').text("finalScore");
+    $('#finalScore').text(game.cat.score*10);
 
   }
   // Updates the collision text

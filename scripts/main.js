@@ -12,10 +12,6 @@ function backgroundScroller(game) {
     }
   }
 }
-
-
 // Create a new game
 const game = new Game();   
-// backgroundScroller(game); 
-game.init();
 const ui = new UI();
