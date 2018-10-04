@@ -85,7 +85,7 @@ function Cat() {
       // If the cat is reaching the TOP ground level
       else if (this.yPos <= 0) {
         this.yPos = 0;
-        //this.dy *= -1;
+        this.dy *= -1;
         this.on_ground = false;
       }
       // If the cat is reaching the RIGHT boundary or the LEFT boundary
