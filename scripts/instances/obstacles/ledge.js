@@ -26,7 +26,7 @@ function ledgeCollision(obstacle, collide_side, game){
     else if (collide_side == 'bottom' && (game.cat.dy < 0 || ui.keyHandler.up)){ 
         game.cat.dy = game.cat.move_speed;
     }
-    // game.cat.dx *= game.world.ground_drag_force;
+    game.cat.dx *= game.world.ground_drag_force;
     game.cat.xPos += game.cat.dx;
     
 

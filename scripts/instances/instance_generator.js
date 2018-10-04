@@ -62,11 +62,14 @@ function generateStars() {
                     (new Star(2870, 150, 'star1009')).concat
                     (this.generateTripleStarsDownward(3700, 30, 150, 1, 30)).concat
                     (this.generateTripleStarsDownward(5000, 250, 70, 0, 35)).concat
+                    (this.generateTripleStarsDownward(3700, 200, 150, 1, 55)).concat
                     (this.generateTripleStarsUpward(4650, 340, 70, 2, 40)).concat
                     (this.generateTripleStarsDownward(5400, 40, 80, 2, 45)).concat
                     (this.generateTripleStarsDownward(5300, 140, 80, 6, 50)).concat
                     (this.generateStarWall(3115, 35, 3, 3, 200, 120, 2000)).concat
-                    (this.generateStarWall(3215, 35, 3, 3, 200, 120, 3000));
+                    (this.generateStarWall(3215, 35, 3, 3, 200, 120, 3000)).concat
+                    (new Star(2122, 300, 'star1010'));
+                    ;
 
     return star_list;
 }
@@ -120,7 +123,6 @@ function generateBricks() {
 
 function generateLedges() {
     this.generateTripleLedgesDownward = function(starting_x, starting_y, gap_x, gap_y, starting_id){
-        var gap = 10;
         var ids = ['ledge' + starting_id, 'ledge' + starting_id+1, 'ledge' + starting_id+2]
         var ledge_lst = [
             new Ledge(starting_x, starting_y, LEDGE_WIDTH, LEDGE_HEIGHT, ids[0]),
@@ -131,7 +133,6 @@ function generateLedges() {
     }
 
     this.generateTripleLedgesUpward = function(starting_x, starting_y, gap_x, gap_y, starting_id){
-        var gap = 10;
         var ids = ['ledge' + starting_id, 'ledge' + starting_id+1, 'ledge' + starting_id+2];
         var ledge_lst = [
             new Ledge(starting_x, starting_y, LEDGE_WIDTH, LEDGE_HEIGHT,ids[0]),
@@ -158,22 +159,24 @@ function generateLedges() {
                     (this.generateTripleLedgesUpward(1500, 400, 10, 10, 5)).concat
                     (new Ledge(1100, 280, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1000')).concat
                     (this.generateTripleLedgesUpward(1200, 200, 30, 15, 10)).concat
-                    (new Ledge(1550, 210, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1001')).concat
+                    (new Ledge(1550, 200, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1001')).concat
                     (this.generateTripleLedgesUpward(5000, 200, 10, 10, 20)).concat
                     (new Ledge(2350, 300, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1002')).concat
                     (new Ledge(1850, 200, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1003')).concat
                     (new Ledge(2000, 150, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1004')).concat
                     (new Ledge(2175, 90, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1005')).concat
-                    (new Ledge(2350, 140, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1006')).concat
+                    (new Ledge(2350, 130, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1006')).concat
                     (new Ledge(2525, 90, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1007')).concat
-                    (new Ledge(2700, 140, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1008')).concat
+                    (new Ledge(2700, 145, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1008')).concat
                     (new Ledge(2850, 200, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1009')).concat
-                    (this.generateLedgeWall(3100, 90, 3, 3, 200, 120, 2000)).concat
-                    (this.generateTripleLedgesDownward(3700, 90, 100, 10, 30)).concat
+                    (this.generateLedgeWall(3100, 100, 3, 3, 200, 120, 2000)).concat
+                    (this.generateTripleLedgesDownward(3700, 100, 100, 10, 30)).concat
+                    (this.generateTripleLedgesDownward(3700, 260, 100, 10, 55)).concat
                     (this.generateTripleLedgesDownward(5000, 300, 10, 10, 35)).concat
                     (this.generateTripleLedgesUpward(4650, 400, 10, 10, 40)).concat
                     (this.generateTripleLedgesDownward(5400, 100, 10, 10, 45)).concat
-                    (this.generateTripleLedgesDownward(5300, 200, 20, 30, 50));
+                    (this.generateTripleLedgesDownward(5300, 200, 20, 30, 50)).concat
+                    (new Ledge(2115, 350, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1010'));
 
     return ledge_list;
 }
