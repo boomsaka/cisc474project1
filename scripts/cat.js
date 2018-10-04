@@ -1,6 +1,6 @@
 CAT_WIDTH = $('#cat').width();
 CAT_HEIGHT = $('#cat').height();
-MAX_WIDTH = 5000;
+MAX_WIDTH = 6500;
 
 function Cat() {
     var max_height = $('#gameBoard').height();

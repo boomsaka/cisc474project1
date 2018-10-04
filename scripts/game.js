@@ -5,7 +5,7 @@ function Game() {
   this.star_list;
   this.brick_list;
   this.ledge_list;
-  this.total_time = 300;
+  this.total_time = 20000;
   this.time = this.total_time;
   // this.floating_list;
 

@@ -13,7 +13,7 @@ ground_level = 453.6;
 
 /** Functions for generating instances */
 function generateStars() {
-    this.generateTripleStarsDownward = function(starting_x, starting_y, starting_id, gap_x, gap_y){
+    this.generateTripleStarsDownward = function(starting_x, starting_y, gap_x, gap_y, starting_id){
         var ids = ['star' + starting_id, 'star' + starting_id+1, 'star' + starting_id+2];
         var star_lst = [
             new Star(starting_x, starting_y, ids[0]),
@@ -23,7 +23,7 @@ function generateStars() {
         return star_lst;
     }
 
-    this.generateTripleStarsUpward = function(starting_x, starting_y, starting_id, gap_x, gap_y){
+    this.generateTripleStarsUpward = function(starting_x, starting_y, gap_x, gap_y, starting_id){
         var ids = ['star' + starting_id, 'star' + starting_id+1, 'star' + starting_id+2];
         var star_lst = [
             new Star(starting_x, starting_y, ids[0]),
@@ -33,23 +33,40 @@ function generateStars() {
         return star_lst;
     }
 
-    this.generateStarsAtSpecifiedPosition = function(){
-        var star_lst = [
-            // new Star(680, 310, 'star20'),
-            // new Star(740, 330, 'star21'),
-            // new Star(800, 350, 'star22'),
-            // new Star(850, 370, 'star23'),
-            // new Star(680, 360, 'star24'),
-            // new Star(680, 410, 'star25'),
-            // new Star(740, 390, 'star26'),
-            // new Star(800, 410, 'star27'),
-        ]
-        return star_lst;
+    this.generateStarWall = function(starting_x, starting_y, dim_x, dim_y, gap_x, gap_y, starting_id){
+        var star_lst = []
+        for (var i = 0 ; i < dim_y; i++){
+            for (var j = 0; j < dim_x; j++){
+                id = 'star' + starting_id;
+                star_lst.push(new Star(starting_x + gap_x*j, starting_y + gap_y*i, id));
+                starting_id++;
+            }
+        }
+        return star_lst;        
     }
 
-    var star_list = this.generateTripleStarsUpward(350, 300, 1, 50, 20).concat
-                    (this.generateTripleStarsDownward(700, 120, 4, 90, 10)).concat
-                    (this.generateStarsAtSpecifiedPosition());
+    var star_list = this.generateTripleStarsUpward(350, 300, 50, 20, 1).concat
+                    (this.generateTripleStarsDownward(700, 120, 90, 10, 4)).concat
+                    (this.generateTripleStarsUpward(1500, 400, 10, 10, 10)).concat
+                    (new Star(1100, 200, 'star1000')).concat
+                    (this.generateTripleStarsUpward(1200, 130, 90, 5, 15)).concat
+                    (new Star(1550, 150, 'star1001')).concat
+                    (this.generateTripleStarsUpward(5000, 130, 80, 5, 20)).concat
+                    (new Star(2370, 240, 'star1002')).concat
+                    (new Star(1870, 150, 'star1003')).concat
+                    (new Star(2020, 100, 'star1004')).concat
+                    (new Star(2190, 40, 'star1005')).concat
+                    (new Star(2370, 80, 'star1006')).concat
+                    (new Star(2540, 40, 'star1007')).concat
+                    (new Star(2720, 90, 'star1008')).concat
+                    (new Star(2870, 150, 'star1009')).concat
+                    (this.generateTripleStarsDownward(3700, 30, 150, 1, 30)).concat
+                    (this.generateTripleStarsDownward(5000, 250, 70, 0, 35)).concat
+                    (this.generateTripleStarsUpward(4650, 340, 70, 2, 40)).concat
+                    (this.generateTripleStarsDownward(5400, 40, 80, 2, 45)).concat
+                    (this.generateTripleStarsDownward(5300, 140, 80, 6, 50)).concat
+                    (this.generateStarWall(3115, 35, 3, 3, 200, 120, 2000)).concat
+                    (this.generateStarWall(3215, 35, 3, 3, 200, 120, 3000));
 
     return star_list;
 }
@@ -93,71 +110,72 @@ function generateBricks() {
 
     brick_list = this.generateTripleBricks(320, 1).concat
                  (this.generateTripleBricks(1850, 7)).concat
-                 (this.generateTripleBricksBackwards(2500, 20));
+                 (this.generateTripleBricksBackwards(2500, 20)).concat
+                 (this.generateTripleBricks(4200, 30)).concat
+                 (this.generateTripleBricksBackwards(5800, 40))
+                 ;
     
     return brick_list;
 }
 
 function generateLedges() {
-    this.generateTripleLedgesDownward = function(starting_x, starting_y, starting_id){
+    this.generateTripleLedgesDownward = function(starting_x, starting_y, gap_x, gap_y, starting_id){
         var gap = 10;
         var ids = ['ledge' + starting_id, 'ledge' + starting_id+1, 'ledge' + starting_id+2]
         var ledge_lst = [
-            new Ledge(starting_x, starting_y, LEDGE_WIDTH, LEDGE_HEIGHT,ids[0]),
-            new Ledge(starting_x + LEDGE_WIDTH + gap, starting_y + LEDGE_HEIGHT + gap, LEDGE_WIDTH, LEDGE_HEIGHT,ids[1]),
-            new Ledge(starting_x + LEDGE_WIDTH*2  + gap*2, starting_y + LEDGE_HEIGHT*2 + gap*2, LEDGE_WIDTH, LEDGE_HEIGHT,ids[2]),
+            new Ledge(starting_x, starting_y, LEDGE_WIDTH, LEDGE_HEIGHT, ids[0]),
+            new Ledge(starting_x + LEDGE_WIDTH + gap_x, starting_y + LEDGE_HEIGHT + gap_y, LEDGE_WIDTH, LEDGE_HEIGHT, ids[1]),
+            new Ledge(starting_x + LEDGE_WIDTH*2  + gap_x*2, starting_y + LEDGE_HEIGHT*2 + gap_y*2, LEDGE_WIDTH, LEDGE_HEIGHT, ids[2]),
         ]
         return ledge_lst;
     }
 
-    this.generateTripleLedgesUpward = function(starting_x, starting_y, starting_id){
+    this.generateTripleLedgesUpward = function(starting_x, starting_y, gap_x, gap_y, starting_id){
         var gap = 10;
-        var ids = ['ledge' + starting_id, 'ledge' + starting_id+1, 'ledge' + starting_id+2]
+        var ids = ['ledge' + starting_id, 'ledge' + starting_id+1, 'ledge' + starting_id+2];
         var ledge_lst = [
             new Ledge(starting_x, starting_y, LEDGE_WIDTH, LEDGE_HEIGHT,ids[0]),
-            new Ledge(starting_x + LEDGE_WIDTH + gap, starting_y - LEDGE_HEIGHT - gap, LEDGE_WIDTH, LEDGE_HEIGHT,ids[1]),
-            new Ledge(starting_x + LEDGE_WIDTH*2  + gap*2, starting_y - LEDGE_HEIGHT*2 - gap*2, LEDGE_WIDTH, LEDGE_HEIGHT,ids[2]),
+            new Ledge(starting_x + LEDGE_WIDTH + gap_x, starting_y - LEDGE_HEIGHT - gap_y, LEDGE_WIDTH, LEDGE_HEIGHT,ids[1]),
+            new Ledge(starting_x + LEDGE_WIDTH*2  + gap_x*2, starting_y - LEDGE_HEIGHT*2 - gap_y*2, LEDGE_WIDTH, LEDGE_HEIGHT,ids[2]),
         ]
         return ledge_lst;
-    }    
+    }
 
-    var ledge_list = this.generateTripleLedgesDownward(800, 250, 1).concat
-                    (this.generateTripleLedgesUpward(1500, 400, 5)).concat
+    this.generateLedgeWall = function(starting_x, starting_y, dim_x, dim_y, gap_x, gap_y, starting_id){
+        var ledge_lst = []
+        for (var i = 0 ; i < dim_y; i++){
+            for (var j = 0; j < dim_x; j++){
+                id = 'ledge' + starting_id;
+                ledge_lst.push(new Ledge(starting_x + gap_x*j, starting_y + gap_y*i, LEDGE_WIDTH, LEDGE_HEIGHT, id));
+                starting_id++;
+            }
+        }
+        return ledge_lst;
+    }
+    
+
+    var ledge_list = this.generateTripleLedgesDownward(800, 250, 10, 10, 1).concat
+                    (this.generateTripleLedgesUpward(1500, 400, 10, 10, 5)).concat
                     (new Ledge(1100, 280, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1000')).concat
-                    (this.generateTripleLedgesUpward(1200, 200, 10)).concat
+                    (this.generateTripleLedgesUpward(1200, 200, 30, 15, 10)).concat
                     (new Ledge(1550, 210, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1001')).concat
-                    (this.generateTripleLedgesUpward(5000, 200, 20)).concat
+                    (this.generateTripleLedgesUpward(5000, 200, 10, 10, 20)).concat
                     (new Ledge(2350, 300, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1002')).concat
-                    (this.generateTripleLedgesUpward(2100, 150, 25)).concat
-                    (new Ledge(1900, 200, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1003'));
-                    
+                    (new Ledge(1850, 200, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1003')).concat
+                    (new Ledge(2000, 150, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1004')).concat
+                    (new Ledge(2175, 90, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1005')).concat
+                    (new Ledge(2350, 140, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1006')).concat
+                    (new Ledge(2525, 90, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1007')).concat
+                    (new Ledge(2700, 140, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1008')).concat
+                    (new Ledge(2850, 200, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1009')).concat
+                    (this.generateLedgeWall(3100, 90, 3, 3, 200, 120, 2000)).concat
+                    (this.generateTripleLedgesDownward(3700, 90, 100, 10, 30)).concat
+                    (this.generateTripleLedgesDownward(5000, 300, 10, 10, 35)).concat
+                    (this.generateTripleLedgesUpward(4650, 400, 10, 10, 40)).concat
+                    (this.generateTripleLedgesDownward(5400, 100, 10, 10, 45)).concat
+                    (this.generateTripleLedgesDownward(5300, 200, 20, 30, 50));
 
-    // var ledge_list = [
-    // //   new Ledge(BLOCK,      BLOCK * 3,  BLOCK * 2, 'ledge1'),
-    // //   new Ledge(BLOCK * 4,  BLOCK * 3,  BLOCK * 5, 'ledge2'),
-    // //   new Ledge(BLOCK * 6,  BLOCK * 2,  BLOCK * 2, 'ledge3'),
-    // //   new Ledge(BLOCK * 9,  BLOCK,      BLOCK * 2, 'ledge4'),
-    // //   new Ledge(BLOCK * 11, BLOCK * 3,  BLOCK * 4, 'ledge5'),
-    // //   new Ledge(BLOCK * 12, BLOCK * 2,  BLOCK * 2, 'ledge6'),
-    // //   new Ledge(BLOCK * 16, BLOCK * 3,  BLOCK * 3, 'ledge7'),
-    // //   new Ledge(BLOCK * 18, BLOCK * 2,  BLOCK * 3, 'ledge8')
-    // ]
     return ledge_list;
-}
-
-
-
-function generateFloatings() {
-    this.generateTripleFloating = function(){
-        var floating_lst = [
-            new Floating(500, 150, 90, 40, 'floating1'),
-        ]
-        return floating_lst;
-    }
-
-    var floating_list = this.generateTripleFloating();
-
-    return floating_list;
 }
 
 /** Updating the instance position in css corresponding to its object position */
