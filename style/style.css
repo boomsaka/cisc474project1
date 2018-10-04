@@ -1,12 +1,9 @@
 #gameBoard{
     width: 980px;    
     height: 560px;
-    border-style:solid;
-    border-width:1px;
-    border-color:black;
     margin:0;
     padding:0;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 #test{
@@ -23,7 +20,7 @@
 }
 
 #startScreen{
-    background:url('../images/Start_Screen.png');
+    background:url('../images/Start_Screen2.png');
     background-size: 980px 560px;
     background-position-x: 0px;
     background-repeat: no-repeat;
@@ -31,13 +28,10 @@
     width: 980px;
     height: 560px;
     position: absolute;
-    border-style:solid;
-    border-width:1px;
-    border-color:black;
 }
 
 #endScreen{
-    background:url('../images/endScreen.png');
+    background:url('../images/endScreen2.png');
     background-size: contain;
     background-position-x: 0px;
     background-repeat: no-repeat;
@@ -46,18 +40,15 @@
     height: 560px;
     position: absolute;
     visibility:hidden;
-    border-style:solid;
-    border-width:1px;
-    border-color:black;
 }
 
 
 #startGameButton{
     background-color: transparent;
     width: 290px;    
-    height: 160px;
+    height: 135px;
     left: 360px;
-    top: 320px;
+    top: 300px;
     position: absolute;
     border: none;
     cursor:pointer;
@@ -68,8 +59,8 @@
     background-color:transparent;
     width: 240px;    
     height: 60px;
-    left: 360px;
-    top: 350px;
+    left: 370px;
+    top: 360px;
     position: absolute;
     border: none;
     cursor:pointer;
@@ -85,8 +76,7 @@
     width: 960px;
     height: 540px;
     position: absolute;
-    overflow: scroll;
-
+    overflow: hidden;
 }
 
 #playBoard{
@@ -105,9 +95,6 @@
     background-size:cover;
     height:53px;
     width:90px;
-    border-style:solid;
-    border-width:1px;
-    border-color:black;
 }
 
 .brick{
@@ -115,9 +102,6 @@
     background:url('../images/brick_1.png');
     background-repeat: no-repeat;
     background-size: cover;
-    border-style:solid;
-    border-width:1px;
-    border-color:black;
 }
 
 .ledge{
@@ -125,25 +109,7 @@
     background:url('../images/fly_ledge.png');
     background-size: contain;
     background-repeat: no-repeat;
-    /*background-repeat: no-repeat;
-    background-size:100px; */
-    /* height:108px;
-    width:108px; */
-    border-style:solid;
-    border-width:1px;
-    border-color:red;
 }
-
-.floating{
-    position: absolute;
-    background:url('../images/fly_ledge.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    /* border-style:solid;
-    border-width:1px;
-    border-color:red; */
-}
-
 
 .star{
     position: absolute;
@@ -152,9 +118,6 @@
     background-size:45px;
     height:52px;
     width:45px;
-    /* border-style:solid;
-    border-width:1px;
-    border-color:black; */
 }
 
 #scoreboard{
@@ -166,9 +129,6 @@
     left: 5px;
     top: 5px;
     position: absolute;
-    /* border-style:solid;
-    border-width:1px;
-    border-color:black; */
     margin:0;
     padding:0;
 }
@@ -182,9 +142,6 @@
     left: 10px;
     top: 10px;
     position: absolute;
-    /* border-style:solid;
-    border-width:1px;
-    border-color:black; */
     margin:0;
     padding:0;
 }
@@ -199,9 +156,6 @@
     height: 30px;
     font-size: 24px;;
     font-weight: bold;
-    /* border-style:solid;
-    border-width:1px;
-    border-color:purple; */
     margin:0;
     padding:0;
 }
@@ -231,9 +185,6 @@
     left: 780px;
     top: 5px;
     position: absolute;
-    /* border-style:solid;
-    border-width:1px;
-    border-color:black; */
     margin:0;
     padding:0;
 }
@@ -247,9 +198,6 @@
     left: 12px;
     top: 10px;
     position: absolute;
-    /* border-style:solid;
-    border-width:1px;
-    border-color:black; */
     margin:0;
     padding:0;
 }
@@ -264,9 +212,6 @@
     height: 30px;
     font-size: 24px;;
     font-weight: bold;
-    /* border-style:solid;
-    border-width:1px;
-    border-color:purple; */
     margin:0;
     padding:0;
 }

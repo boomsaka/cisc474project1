@@ -47,7 +47,7 @@ function generateStars() {
 
     var star_list = this.generateTripleStarsUpward(350, 300, 50, 20, 1).concat
                     (this.generateTripleStarsDownward(700, 120, 90, 10, 4)).concat
-                    (this.generateTripleStarsUpward(1500, 400, 10, 10, 10)).concat
+                    (this.generateTripleStarsUpward(1500, 335, 40, 1, 10)).concat
                     (new Star(1100, 200, 'star1000')).concat
                     (this.generateTripleStarsUpward(1200, 130, 90, 5, 15)).concat
                     (new Star(1550, 150, 'star1001')).concat
