@@ -7,7 +7,7 @@
 }
 
 #startScreen{
-    background:url('../images/Start_Screen2.png');
+    background:url('../images/Start_Screen.png');
     background-size: 980px 560px;
     background-position-x: 0px;
     background-repeat: no-repeat;
@@ -18,7 +18,7 @@
 }
 
 #endScreen{
-    background:url('../images/endScreen2.png');
+    background:url('../images/End_Screen.png');
     background-size: contain;
     background-position-x: 0px;
     background-repeat: no-repeat;
@@ -57,7 +57,7 @@
 }
 
 #backgroundBoard{
-    background:url('../images/Background3.png');
+    background:url('../images/Background.png');
     background-size: cover;
     background-position-x: 0px;
     background-repeat: repeat;
@@ -88,14 +88,14 @@
 
 .brick{
     position: absolute;
-    background:url('../images/brick_1.png');
+    background:url('../images/Brick.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .ledge{
     position: absolute;
-    background:url('../images/fly_ledge.png');
+    background:url('../images/Fly_Ledge.png');
     background-size: contain;
     background-repeat: no-repeat;
 }
