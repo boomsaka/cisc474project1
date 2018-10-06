@@ -1,10 +1,9 @@
+/** Global Variables */
 CAT_WIDTH = $('#cat').width();
 CAT_HEIGHT = $('#cat').height();
 MAX_WIDTH = 6500;
 
-function Cat() {
-    var max_height = $('#gameBoard').height();
-  
+function Cat() {  
     // Cat attributes
     this.xPos = 0;
     this.yPos = 0;
@@ -17,8 +16,6 @@ function Cat() {
     this.height = CAT_HEIGHT;
     this.score = 0;
     this.screenXPos = 0;
-    // this.is_jumping = false;
-    // this.is_landing = false;
   
     // Update the cat's x position accordingly
     this.updateXpos = function () {
@@ -59,21 +56,6 @@ function Cat() {
       // Update cat's position
       this.xPos += this.dx;
       this.yPos += this.dy;
-
-      // // Update is_jumping
-      // if (!this.on_ground){
-      //   this.is_jumping = true;
-      // } else{
-      //   this.is_jumping = false;
-      // }
-
-      // // Update is_landed
-      // if (!this.on_ground && this.dy < 0){ // when the cat is not on ground & is falling
-      //   this.is_landing = true;
-      // } else{
-      //   this.is_landing = false;
-      // }
-  
   
       /** Boundary Checking */
       // If the cat is reaching the BOTTOM ground
@@ -101,7 +83,6 @@ function Cat() {
     this.cat_init = function () {
       this.xPos = 0;
       this.screenXPos = 0;
-      //this.xPos = MAX_WIDTH / 2 - CAT_WIDTH/2; // calculates the cat's x position to be at the center
       this.yPos = game.world.ground_level;
       this.on_ground = true;
       this.dx = 0;
@@ -126,15 +107,14 @@ function updateCatCSSPosition() {
   var middle = $('#gameBoard').width() / 2 - CAT_WIDTH / 2;
   var dist_traveled = (MAX_WIDTH - middle) - CAT_WIDTH;
   
-  //cat is to the left of where screen starts scrolling
+  // Cat is to the left of where screen starts scrolling
   if (game.cat.xPos < middle) {
     $('#cat').css('left', game.cat.xPos + 'px');
     updateInstanceCSSPosition(game.star_list, 0);
     updateInstanceCSSPosition(game.ledge_list, 0);
     updateInstanceCSSPosition(game.brick_list, 0);
-    // updateInstanceCSSPosition(game.floating_list, 0);
   }
-  //cat is to the right of where screen stops scrolling
+  // Cat is to the right of where screen stops scrolling
   else if (game.cat.xPos + CAT_WIDTH > (MAX_WIDTH - middle)) {
     $('#cat').css('left', game.cat.xPos - dist_traveled + middle + 'px');
   }
@@ -143,6 +123,5 @@ function updateCatCSSPosition() {
     updateInstanceCSSPosition(game.star_list, game.cat.xPos * -1 + middle);
     updateInstanceCSSPosition(game.ledge_list, game.cat.xPos * -1 + middle);
     updateInstanceCSSPosition(game.brick_list, game.cat.xPos * -1 + middle);
-    // updateInstanceCSSPosition(game.floating_list, game.cat.xPos * -1, middle);
   }
 }

@@ -1,5 +1,4 @@
-// image is broken up into 5 rows of 216 pixels
-BLOCK = $('#backgroundBoard').height() * .2; // 108
+/** Global Variables */
 BRICK_WIDTH = 79;
 BRICK_HEIGHT = 76;
 
@@ -9,7 +8,7 @@ LEDGE_HEIGHT = 40;
 STAR_WIDTH = 45;
 STAR_HEIGHT = 52;
 
-ground_level = 453.6;
+GROUND_LEVEL = 453.6;
 
 /** Functions for generating instances */
 function generateStars() {
@@ -80,14 +79,14 @@ function generateBricks() {
         var offset = 4;
         var ids = ['brick' + starting_id, 'brick' + starting_id+1, 'brick' + starting_id+2, 'brick' + starting_id+3, 'brick' + starting_id+4, 'brick' + starting_id+5];
         var brick_lst = [
-            new Brick(starting_x,  ground_level - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[0]),
+            new Brick(starting_x,  GROUND_LEVEL - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[0]),
 
-            new Brick(starting_x + BRICK_WIDTH + gap, ground_level - BRICK_HEIGHT*2 + offset, BRICK_WIDTH, BRICK_HEIGHT, ids[1]),
-            new Brick(starting_x + BRICK_WIDTH + gap, ground_level - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[2]),
+            new Brick(starting_x + BRICK_WIDTH + gap, GROUND_LEVEL - BRICK_HEIGHT*2 + offset, BRICK_WIDTH, BRICK_HEIGHT, ids[1]),
+            new Brick(starting_x + BRICK_WIDTH + gap, GROUND_LEVEL - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[2]),
 
-            new Brick(starting_x + BRICK_WIDTH * 2 + gap*2, ground_level - BRICK_HEIGHT*3 + offset*2, BRICK_WIDTH, BRICK_HEIGHT, ids[3]),
-            new Brick(starting_x + BRICK_WIDTH * 2 + gap*2, ground_level - BRICK_HEIGHT*2 + offset, BRICK_WIDTH, BRICK_HEIGHT, ids[4]),
-            new Brick(starting_x + BRICK_WIDTH * 2 + gap*2, ground_level - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[5]),
+            new Brick(starting_x + BRICK_WIDTH * 2 + gap*2, GROUND_LEVEL - BRICK_HEIGHT*3 + offset*2, BRICK_WIDTH, BRICK_HEIGHT, ids[3]),
+            new Brick(starting_x + BRICK_WIDTH * 2 + gap*2, GROUND_LEVEL - BRICK_HEIGHT*2 + offset, BRICK_WIDTH, BRICK_HEIGHT, ids[4]),
+            new Brick(starting_x + BRICK_WIDTH * 2 + gap*2, GROUND_LEVEL - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[5]),
         ]
 
         return brick_lst;
@@ -98,14 +97,14 @@ function generateBricks() {
         var offset = 4;
         var ids = ['brick' + starting_id, 'brick' + starting_id+1, 'brick' + starting_id+2, 'brick' + starting_id+3, 'brick' + starting_id+4, 'brick' + starting_id+5];
         var brick_lst = [
-            new Brick(starting_x + BRICK_WIDTH * 2 + gap*2,  ground_level - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[0]),
+            new Brick(starting_x + BRICK_WIDTH * 2 + gap*2,  GROUND_LEVEL - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[0]),
 
-            new Brick(starting_x + BRICK_WIDTH + gap, ground_level - BRICK_HEIGHT*2 + offset, BRICK_WIDTH, BRICK_HEIGHT, ids[1]),
-            new Brick(starting_x + BRICK_WIDTH + gap, ground_level - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[2]),
+            new Brick(starting_x + BRICK_WIDTH + gap, GROUND_LEVEL - BRICK_HEIGHT*2 + offset, BRICK_WIDTH, BRICK_HEIGHT, ids[1]),
+            new Brick(starting_x + BRICK_WIDTH + gap, GROUND_LEVEL - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[2]),
 
-            new Brick(starting_x, ground_level - BRICK_HEIGHT*3 + offset*2, BRICK_WIDTH, BRICK_HEIGHT, ids[3]),
-            new Brick(starting_x, ground_level - BRICK_HEIGHT*2 + offset, BRICK_WIDTH, BRICK_HEIGHT, ids[4]),
-            new Brick(starting_x, ground_level - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[5]),
+            new Brick(starting_x, GROUND_LEVEL - BRICK_HEIGHT*3 + offset*2, BRICK_WIDTH, BRICK_HEIGHT, ids[3]),
+            new Brick(starting_x, GROUND_LEVEL - BRICK_HEIGHT*2 + offset, BRICK_WIDTH, BRICK_HEIGHT, ids[4]),
+            new Brick(starting_x, GROUND_LEVEL - BRICK_HEIGHT, BRICK_WIDTH, BRICK_HEIGHT, ids[5]),
         ]
 
         return brick_lst;
@@ -154,7 +153,6 @@ function generateLedges() {
         return ledge_lst;
     }
     
-
     var ledge_list = this.generateTripleLedgesDownward(800, 250, 10, 10, 1).concat
                     (this.generateTripleLedgesUpward(1500, 400, 10, 10, 5)).concat
                     (new Ledge(1100, 280, LEDGE_WIDTH, LEDGE_HEIGHT, 'ledge1000')).concat

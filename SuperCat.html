@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
+    
     <head>
         <title>SuperCat</title>
         <link rel="stylesheet" href="./style/style.css" type="text/css">
-        <script type='text/javascript' src="./scripts/controller/UI.js"></script>
-        <script type='text/javascript' src="./scripts/world.js"></script>
-        <script type='text/javascript' src="./scripts/states.js"></script>
+        
+        <!-- The jQuery library (linking to the jquery library sometimes doesn't work) -->
         <script type='text/javascript' src="./scripts/util/jquery.js"></script>
     </head>
 
@@ -19,12 +19,10 @@
                 <div id="backgroundBoard">
                     <div id="stars"></div>
                     <div id="bricks"></div>
-                    <div id="blocks"></div>
                     <div id="ledges"></div>
-                    <!-- <div id="floatings"></div> -->
                     
                     <div id="cat"></div>
-                    <div id= "test"></div>
+
                     <div id="scoreboard">
                         <p id='scoreStar'></p>
                         <p id='score'></p>
@@ -42,13 +40,25 @@
                 <button id="restartGameButton" onclick="gameRestart()"></button>
             </div>
         </div>
-        <script type='text/javascript' src="./scripts/cat.js"></script>
-        <script type='text/javascript' src="./scripts/instances/eatibles/star.js"></script>
-        <script type='text/javascript' src="./scripts/instances/obstacles/ledge.js"></script>
-        <script type='text/javascript' src="./scripts/instances/obstacles/stone.js"></script>
-        <script type='text/javascript' src="./scripts/instances/obstacles/floating.js"></script>
-        <script type='text/javascript' src="./scripts/instances/instance_generator.js"></script>
-        <script type='text/javascript' src="./scripts/game.js"></script>
+
+        <!-- The Game Controller scripts -->
+        <script type='text/javascript' src="./scripts/controller/ui.js"></script>
+        <script type='text/javascript' src="./scripts/controller/state_switcher.js"></script>
+
+        <!-- The Game World (including world gravity, etc.) scripts -->
+        <script type='text/javascript' src="./scripts/model/world.js"></script>
+
+        <!-- The Cat script -->
+        <script type='text/javascript' src="./scripts/model/cat.js"></script>
+
+        <!-- The Instances (stars & obstacles) scripts -->
+        <script type='text/javascript' src="./scripts/model/instances/eatibles/star.js"></script>
+        <script type='text/javascript' src="./scripts/model/instances/obstacles/ledge.js"></script>
+        <script type='text/javascript' src="./scripts/model/instances/obstacles/brick.js"></script>
+        <script type='text/javascript' src="./scripts/model/instances/instance_generator.js"></script>
+
+        <!-- The Game & Main -->
+        <script type='text/javascript' src="./scripts/model/game.js"></script>
         <script type='text/javascript' src="./scripts/main.js"></script>
     </body>
 
